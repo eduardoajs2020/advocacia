@@ -1,0 +1,53 @@
+css- styles.css
+
+dao- MovieDAO.php ReviewDAO.php UserDAO
+
+img - gerais.jpg movies(create), users(create)
+
+models - Message.php, Movie.php, Review.php, User.php(class{parametros{métodos(functions)}}interface{}
+
+templates: footer.php, header, movie_card, user_review
+
+
+livre: auth_process, auth, dashboard, db, editmovie, editfile, global, index, logout, movie_process, movie, newmovie, profile, review_process, search, user_process
+
+
+
+
+CRIAR DADOS DO BD PARA CLIENTES, USUÁRIOS, PROCESSO, CONTRATOS, PESQUISA
+
+
+O SISTEMA DEVERÁ TER:
+
+TELA PARA CADASTRAMENTO DE CLIENTES COM UPLOAD DE DOCUMENTOS.
+
+
+CADASTRO DE USUÁRIOS, ADVOGADOS E CLIENTES, SENDO: 
+
+USUÁRIOS: TODOS OS PRIVILÉGIOS DE CADASTRO + ACOMPANHAMENTO DE PROCESSOS
+
+ADVOGADOS: TODOS OS PRIVILÉGIOS DE CADASTRO + ACOMPANHAMENTOS DIVERSOS (PROCESSOS, HONORÁRIOS, CONTAS A PAGAR E A RECEBER).
+
+TELA PRINCIPAL: LOGIN E/OU CADASTRAMENTO DE USUÁRIOS()
+
+
+TELA INDEX: AGENDA COM COMPROMISSOS(ANDAMENTO DE PROCESSOS, PRAZOS E ETC...)
+
+CONTAS A PAGAR E A RECEBER.
+
+PUBLICAÇÕES DE TRIBUNAIS, POR CLIENTE, ADVOGADO, TRIBUNAL.
+
+
+AGENDA
+
+
+BANCO DE PETIÇÕES
+
+
+RELATÓRIOS
+
+
+ASSINADOR E POSTADOR DIGITAL.
+
+
+
