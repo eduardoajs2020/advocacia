@@ -24,8 +24,8 @@
                     <input type="password" name="senha" placeholder="Senha">
                 </div>
                 <div class="login-senha-button">
-                    <a href="<?=$BASE_URL?>login.php" class="btn btn-danger"><span>Limpar</span></a>
-                    <a href="<?=$BASE_URL?>index.php" class="btn btn-light"><span>Login</span></a>            
+                    <a href="<?=$BASE_URL?>login.php" class="login-senha-button-1"><span>Limpar</span></a>
+                    <a href="<?=$BASE_URL?>index.php" class="login-senha-button-2"><span>Login</span></a>            
                 </div>
             
             </form>

@@ -62,17 +62,18 @@
   background-color: #212;
 }
 .login-senha{
-
-  background-color: #121212;
-  color: #abcdab;;
-  font-size: xx-large;
+  display:flow-root;
+  background-color: #001e;
+  color: #AAA;;
+  font-size:xx-large;
   margin-top: 0;
   margin-left: 30vh;
   padding: 200px;
   width: 150vh;
   height: 100vh;
   border-radius: 15px 15px 15px 15px;
-    
+  opacity: .9;
+  
  
 }
 
@@ -84,13 +85,47 @@
   border-radius: 15px 15px 15px 15px;
 }
 
-.login-senha-button{
-  margin: auto;
-  border-radius: 15px 15px 15px 15px;
-  
-  
-  
+.login-senha-button-1{
+  background-color: #DC3545;
+  border: 2px transparent;
+  color: #FFF;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  transition: .5s;
+  border-radius: 15px 10px 15px 10px;
+ 
 }
+  
+  .login-senha-button-1:hover {
+      border-color: #685119;
+      color: #842029;
+      background-color: #EEE;
+    }
+
+
+.login-senha-button-2 {
+  background-color: #685119;
+  border: 2px transparent;
+  color: #FFF;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  transition: .5s;
+  border-radius: 15px 10px 15px 10px;
+
+}
+
+.login-senha-button-2:hover {
+  border-color: #685119;
+  color: #685119;
+  background-color: #EEE;
+}
+  
 
 /*FORMULARIO PROCESSOS*/
 
@@ -180,22 +215,22 @@
   margin-right: auto;
   text-align: left;
   background-color: #212;
-  border-radius: 15px 15px 15px 15px;
+  
 }
 
 #contact-form input,
 #contact-form label,
 #contact-form textarea{
   display: inline-block;
-  border-radius: 5px 5px 5px 5px;
-  padding: 10px;
+  border-radius: 15px 2px 15px 2px;
+  padding: 5px;
   border: 1px solid #EEE;
   width: 100%;
   color: #AAA;
   
 }
 #contact-form label{
-  color: #999;
+  color: #EEE;
   font-weight: bold;
   border-bottom-style:none;
 }
@@ -210,7 +245,7 @@
 }
 
 #contact-form input[type="submit"]{
-  background-color: #00AD5E;
+  background-color: #685119;
   color: #FFF;
   font-size: 16px;
   font-weight: bold;
@@ -222,9 +257,9 @@
 }
 
 #contact-form input[type="submit"]:hover{
-  border-color:#00AD5E;
-  color: #00AD5E;
-  background-color: #FFF;
+  border-color:#685119;
+  color: #685119;
+  background-color: #EEE;
 }
 
 /*RESPONSIVO*/
