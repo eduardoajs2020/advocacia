@@ -1,14 +1,6 @@
-<!--!DOCTYPE html>
-<html lang="en" dir="ltr">
-  head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maxmum-scale=1, user-scalable=no">
-    <title>Contato</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-  </head-->
+
   <?php 
-  require_once("templates/header.php");
-  
+ require_once("templates/header.php");
   ?>
 
   <body>

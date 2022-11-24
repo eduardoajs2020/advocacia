@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
  <head>
@@ -23,9 +26,16 @@
                     <label for="senha">Informe a senha:</label>
                     <input type="password" name="senha" placeholder="Senha">
                 </div>
+                <div>
+                    <a href="#" id="forgot-pass">Esqueceu a senha?</a>
+                </div>
                 <div class="login-senha-button">
-                    <a href="<?=$BASE_URL?>login.php" class="login-senha-button-1"><span>Limpar</span></a>
+                   
                     <a href="<?=$BASE_URL?>index.php" class="login-senha-button-2"><span>Login</span></a>            
+                </div>
+                <div id="register">
+                    <p>Ainda não tem Cadastro?</p>
+                    <a href="#" class="registrar">Registrar</a>
                 </div>
             
             </form>

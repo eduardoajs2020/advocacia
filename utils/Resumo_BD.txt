@@ -1,0 +1,31 @@
+public $nProcesso;
+public $nomeAdvogado;
+public $oab;
+public $nomeCliente;
+public $cpf;
+public $cnpj;
+public $email;
+public $telefone;
+public $poloAtivo;
+public $poloPassivo;
+public $listisconsorte;
+public $tipoAcao;
+public $objetoAcao;
+public $vara;
+public $comarca;
+public $rito;
+public $foro;
+public $andar;
+public $area;
+public $fase;
+public $situacao;
+public $instancia;
+public $valorCausa;
+public $dataDistribuicao;
+public $dataBaixa;
+
+
+
+BD: id, nProcesso, nomeAdvogado, oab, nomeCliente, cpf, cnpj, email, telefone, poloAtivo, poloPassivo, litisconsorte, tipoAcao, objetoAcao, vara, comarca, rito, foro, andar, area, fase, situacao, instancia, valorCausa, dataDistribuicao, dataBaixa, users_id;
+
+:nProcesso, :nomeAdvogado, :oab, :nomeCliente, :cpf, :cnpj, :email, :telefone, :poloAtivo, :poloPassivo, :listisconsorte, :tipoAcao, :objetoAcao, :vara, :comarca, :rito, :foro, :andar, :area, :fase, :situacao, :instancia, :valorCausa, :dataDistribuicao, :dataBaixa, :users_id;

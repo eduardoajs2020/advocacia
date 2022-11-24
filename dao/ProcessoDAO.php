@@ -3,10 +3,11 @@
 require_once("models/Client.php");
 require_once("models/Message.php");
 require_once("models/processo.php");
+require_once("dao/ProcessoDAO.php");
 
 //Review DAO
 require_once("dao/ReviewDAO.php");
-class ClientDAO implements ClientDAOInterface{
+class ProcessDAO implements ProcessDAOInterface{
 
     private $conn;
     private $url;
@@ -20,18 +21,37 @@ class ClientDAO implements ClientDAOInterface{
 
     }
 
-    public function buildClient($data){
+    public function buildProcess($data){
 
-        $client = new Client();
+        $process = new Processo();
 
-        $client->id = $data["id"];
-        $client->title = $data["title"];
-        $client->description = $data["description"];
-        $client->image = $data["image"];
-        $client->trailer = $data["trailer"];
-        $client->category = $data["category"];
-        $client->length = $data["length"];
-        $client->users_id = $data["users_id"];
+        $process->id = $data["id"];
+        $process->nProcesso = $data["nProcesso"];
+        $process->nomeAdvogado = $data["nomeAdvogado"];
+        $process->oab = $data["oab"];
+        $process->nomeCliente = $data["nomeCliente"];
+        $process->cpf = $data["cpf"];
+        $process->cnpj = $data["cnpj"];
+        $process->email = $data["email"];
+        $process->telefone = $data["telefone"];
+        $process->poloAtivo = $data["poloAtivo"];
+        $process->poloPassivo = $data["poloPassivo"];
+        $process->listisconsorte = $data["listisconsorte"];
+        $process->tipoAcao = $data["tipoAcao"];
+        $process->objetoAcao = $data["objetoAcao"];
+        $process->vara = $data["vara"];
+        $process->comarca = $data["comarca"];
+        $process->rito = $data["rito"];
+        $process->foro = $data["foro"];
+        $process->andar = $data["andar"];
+        $process->area = $data["area"];
+        $process->fase = $data["fase"];
+        $process->situacao = $data["situacao"];
+        $process->instancia = $data["instancia"];
+        $process->valorCausa = $data["valorCausa"];
+        $process->dataDistribuicao = $data["dataDistribuicao"];
+        $process->dataBaixa = $data["dataBaixa"];
+        $process->users_id = $data["users_id"];
 
        /* //Recebe as ratings do filme
         $reviewDao = new ReviewDao($this->conn, $this->url);
@@ -48,55 +68,55 @@ class ClientDAO implements ClientDAOInterface{
 
     }
 
-    public function getLatestClients(){
-        $clients = [];
+    public function getLatestProcess(){
+        $process = [];
 
-        $stmt = $this->conn->query("SELECT * FROM clients ORDER BY id DESC");
+        $stmt = $this->conn->query("SELECT * FROM process ORDER BY id DESC");
 
         $stmt->execute();
 
         if($stmt->rowCount() >0){
 
-            $clientsArray = $stmt-> fetchAll();
+            $processArray = $stmt-> fetchAll();
 
-            foreach($clientsArray as $client){
-                $client[] = $this->buildClient($client);
+            foreach($processArray as $$process){
+                $process[] = $this->buildProcess($$process);
             }
         }
 
-        return $clients;
+        return $process;
     }
 
-    public function getClientsByCategory($category){
+    public function getProcessByTipoacao($tipoAcao){
 
-         $clients = [];
+          $process = [];
 
-        $stmt = $this->conn->prepare("SELECT * FROM clients
-                                     WHERE category = :category
+        $stmt = $this->conn->prepare("SELECT * FROM  process
+                                     WHERE tipoAcao = :tipoAcao
                                     ORDER BY id DESC");
 
-        $stmt->bindParam(":category", $category);
+        $stmt->bindParam(":tipoAcao", $tipoAcao);
 
         $stmt->execute();
 
         if($stmt->rowCount() >0){
 
-            $clientsArray = $stmt-> fetchAll();
+            $processArray = $stmt-> fetchAll();
 
-            foreach($clientsArray as $client){
-                $clients[] = $this->buildClient($client);
+            foreach($processArray as $$process){
+                $process[] = $this->buildProcess($$process);
             }
         }
 
-        return $clients;
+        return $process;
     }
 
 
-    public function getClientsByUserId($id){
+    public function getProcessByUserId($id){
 
-        $clients = [];
+        $process = [];
 
-        $stmt = $this->conn->prepare("SELECT * FROM clients
+        $stmt = $this->conn->prepare("SELECT * FROM process
                                      WHERE users_id = :users_id");
 
         $stmt->bindParam(":users_id", $id);
@@ -105,22 +125,22 @@ class ClientDAO implements ClientDAOInterface{
 
         if($stmt->rowCount() > 0){
 
-            $clientsArray = $stmt-> fetchAll();
+            $processArray = $stmt-> fetchAll();
 
-            foreach($clientsArray as $client){
-                $clients[] = $this->buildClient($client);
+            foreach($processArray as $$process){
+                $process[] = $this->buildProcess($$process);
             }
         }
 
-        return $clients;
+        return $process;
 
     }
 
     public function findById($id){
 
-        $client = [];
+        $$process = [];
 
-        $stmt = $this->conn->prepare("SELECT * FROM clients
+        $stmt = $this->conn->prepare("SELECT * FROM process
                                      WHERE id = :id");
 
         $stmt->bindParam(":id", $id);
@@ -129,11 +149,11 @@ class ClientDAO implements ClientDAOInterface{
 
         if($stmt->rowCount() > 0){
 
-            $clientData = $stmt-> fetch();
+            $processData = $stmt-> fetch();
 
-            $client = $this->buildClient($clientData);
+            $$process = $this->buildProcess($processData);
 
-            return $client;
+            return $$process;
 
         }else{
 
@@ -146,9 +166,9 @@ class ClientDAO implements ClientDAOInterface{
 
     public function findByTitle($title){
 
-        $clients = [];
+        $process = [];
 
-        $stmt = $this->conn->prepare("SELECT * FROM clients
+        $stmt = $this->conn->prepare("SELECT * FROM process
                                      WHERE title LIKE :title");
 
         $stmt->bindValue(":title", '%'.$title.'%');
@@ -157,76 +177,137 @@ class ClientDAO implements ClientDAOInterface{
 
         if($stmt->rowCount() > 0){
 
-            $clientsArray = $stmt-> fetchAll();
+            $processArray = $stmt-> fetchAll();
 
-            foreach($clientsArray as $client){
-                $clients[] = $this->buildClient($client);
+            foreach($processArray as $$process){
+                $process[] = $this->buildProcess($$process);
             }
 
 
 
         }
-        return $clients;
+        return $process;
 }
 
-    public function create(Client $client){
+    public function create(Processo $process){
 
-        $stmt = $this->conn->prepare("INSERT INTO clients(
-            title, description, image, trailer, category, length, users_id
+        $stmt = $this->conn->prepare("INSERT INTO process(
+            id, nProcesso, nomeAdvogado, oab, nomeCliente, cpf, cnpj, email, telefone, poloAtivo, poloPassivo, litisconsorte, tipoAcao, objetoAcao, vara, comarca, rito, foro, andar, area, fase, situacao, instancia, valorCausa, dataDistribuicao, dataBaixa, users_id
         )VALUES(
-            :title, :description, :image, :trailer, :category, :length, :users_id
+            :id, :nProcesso, :nomeAdvogado, :oab, :nomeCliente, :cpf, :cnpj, :email, :telefone, :poloAtivo, :poloPassivo, :litisconsorte, :tipoAcao, :objetoAcao, :vara, :comarca, :rito, :foro, :andar, :area, :fase, :situacao, :instancia, :valorCausa, :dataDistribuicao, :dataBaixa, :users_id
         )");
-
-            $stmt->bindParam(":title", $client->title);
-            $stmt->bindParam(":description", $client->description);
-            $stmt->bindParam(":image", $client->image);
-            $stmt->bindParam(":trailer", $client->trailer);
-            $stmt->bindParam(":category", $client->category);
-            $stmt->bindParam(":length", $client->length);
-            $stmt->bindParam(":users_id", $client->users_id);
+            $stmt->bindParam(":id", $process->id);
+            $stmt->bindParam(":nProcesso", $process->nProcesso);
+            $stmt->bindParam(":nomeAdvogado", $process->nomeAdvogado);
+            $stmt->bindParam(":aob", $process->oab);
+            $stmt->bindParam(":nomeCliente", $process->nomeCliente);
+            $stmt->bindParam(":cpf", $process->cpf);
+            $stmt->bindParam(":cnpj", $process->cnpj);
+            $stmt->bindParam(":email", $process->email);
+            $stmt->bindParam(":telefone", $process->telefone);
+            $stmt->bindParam(":poloAtivo", $process->poloAtivo);
+            $stmt->bindParam(":poloPassivo", $process->poloPassivo);
+            $stmt->bindParam(":litisconsorte", $process->litisconsorte);
+            $stmt->bindParam(":tipoAcao", $process->tipoAcao);
+            $stmt->bindParam(":objetoAcao", $process->objetoAcao);
+            $stmt->bindParam(":vara", $process->vara);
+            $stmt->bindParam(":comarca", $process->comarca);
+            $stmt->bindParam(":rito", $process->rito);
+            $stmt->bindParam(":foro", $process->foro);
+            $stmt->bindParam(":andar", $process->andar);
+            $stmt->bindParam(":area", $process->area);
+            $stmt->bindParam(":fase", $process->fase);
+            $stmt->bindParam(":situacao", $process->situacao);
+            $stmt->bindParam(":instancia", $process->instancia);
+            $stmt->bindParam(":valorCausa", $process->valorCausa);
+            $stmt->bindParam(":dataDistribuicao", $process->dataDistribuicao);
+            $stmt->bindParam(":dataBaixa", $process->dataBaixa);
+            $stmt->bindParam(":users_id",  $process->users_id);
 
             $stmt->execute();
 
-            //Mensagem de sucesso ao adicionar filme
-            $this->message->setMessage("Cliente adicionado com sucesso!","success","index.php");
+            //Mensagem de sucesso ao adicionar processo
+            $this->message->setMessage("Processo adicionado com sucesso!","success","index.php");
     }
 
-    public function update(Client $client){
+    public function update(Processo $process){
 
-        $stmt=$this->conn->prepare("UPDATE $client SET
-            title = :title,
-            description = :description,
-            image = :image,
-            category = :category,
-            trailer = :trailer,
-            length = :length
+        $stmt=$this->conn->prepare("UPDATE $process SET
+            
+            nProcesso = :nProcesso, 
+            nomeAdvogado = :nomeAdvogado, 
+            oab = :oab, 
+            nomeCliente = :nomeCliente, 
+            cpf = :cpf, 
+            cnpj = :cnpj, 
+            email = :email, 
+            telefone = :telefone, 
+            poloAtivo = :poloAtivo, 
+            poloPassivo = :poloPassivo, 
+            litisconsorte = :litisconsorte, 
+            tipoAcao = :tipoAcao, 
+            objetoAcao = :objetoAcao, 
+            vara = :vara, 
+            comarca = :comarca, 
+            rito = :rito, 
+            foro = :foro, 
+            andar = :andar, 
+            area = :area, 
+            fase = :fase, 
+            situacao = :situacao, 
+            instancia = :instancia, 
+            valorCausa = :valorCausa, 
+            dataDistribuicao = :dataDistribuicao, 
+            dataBaixa = :dataBaixa, 
+            users_id = : users_id
             WHERE id = :id
         ");
-        $stmt->bindParam(":title", $client->title);
-        $stmt->bindParam(":description", $client->description);
-        $stmt->bindParam(":image", $client->image);
-        $stmt->bindParam(":category", $client->category);
-        $stmt->bindParam(":trailer", $client->trailer);
-        $stmt->bindParam(":length", $client->length);
-        $stmt->bindParam(":id", $client->id);
+            $stmt->bindParam(":id", $process->id);
+            $stmt->bindParam(":nProcesso", $process->nProcesso);
+            $stmt->bindParam(":nomeAdvogado", $process->nomeAdvogado);
+            $stmt->bindParam(":aob", $process->oab);
+            $stmt->bindParam(":nomeCliente", $process->nomeCliente);
+            $stmt->bindParam(":cpf", $process->cpf);
+            $stmt->bindParam(":cnpj", $process->cnpj);
+            $stmt->bindParam(":email", $process->email);
+            $stmt->bindParam(":telefone", $process->telefone);
+            $stmt->bindParam(":poloAtivo", $process->poloAtivo);
+            $stmt->bindParam(":poloPassivo", $process->poloPassivo);
+            $stmt->bindParam(":litisconsorte", $process->litisconsorte);
+            $stmt->bindParam(":tipoAcao", $process->tipoAcao);
+            $stmt->bindParam(":objetoAcao", $process->objetoAcao);
+            $stmt->bindParam(":vara", $process->vara);
+            $stmt->bindParam(":comarca", $process->comarca);
+            $stmt->bindParam(":rito", $process->rito);
+            $stmt->bindParam(":foro", $process->foro);
+            $stmt->bindParam(":andar", $process->andar);
+            $stmt->bindParam(":area", $process->area);
+            $stmt->bindParam(":fase", $process->fase);
+            $stmt->bindParam(":situacao", $process->situacao);
+            $stmt->bindParam(":instancia", $process->instancia);
+            $stmt->bindParam(":valorCausa", $process->valorCausa);
+            $stmt->bindParam(":dataDistribuicao", $process->dataDistribuicao);
+            $stmt->bindParam(":dataBaixa", $process->dataBaixa);
+            $stmt->bindParam(":users_id",  $process->users_id);
+
 
         $stmt->execute();
 
-        //Mensagem de sucesso ao editar filme
-            $this->message->setMessage("Cliente atualizado com sucesso!","success","dashboard.php");
+        //Mensagem de sucesso ao editar processo
+            $this->message->setMessage("Processo atualizado com sucesso!","success","dashboard.php");
 
     }
 
     public function destroy($id){
 
-        $stmt = $this->conn->prepare("DELETE FROM clients WHERE id = :id");
+        $stmt = $this->conn->prepare("DELETE FROM process WHERE id = :id");
 
         $stmt->bindParam(":id", $id);
 
         $stmt-> execute();
 
         //Mensagem de sucesso ao remover processo
-            $this->message->setMessage("Cliente removido com sucesso!","success","dashboard.php");
+            $this->message->setMessage("Processo removido com sucesso!","success","dashboard.php");
     }
 
 }

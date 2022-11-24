@@ -65,12 +65,13 @@
   display:flow-root;
   background-color: #001e;
   color: #AAA;;
-  font-size:xx-large;
-  margin-top: 0;
-  margin-left: 30vh;
-  padding: 200px;
-  width: 150vh;
-  height: 100vh;
+  font-size: 24px;
+  margin-top: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px 30px 30px 30px;
+  width: 500px;
+  height: 500px;
   border-radius: 15px 15px 15px 15px;
   opacity: .9;
   
@@ -116,6 +117,7 @@
   display: inline-block;
   font-size: 20px;
   transition: .5s;
+  width: 100%;
   border-radius: 15px 10px 15px 10px;
 
 }
@@ -126,6 +128,60 @@
   background-color: #EEE;
 }
   
+#forgot-pass{
+  text-align: right ;
+  display: block;
+  font-size: 16px;
+  color: #FFF;
+  margin: 20px;
+ 
+  
+}
+#register{
+  text-align: center; 
+  font-size: 16px;
+  color: #FFF;
+  border:none;
+  height: 40px;
+  margin-top: 50px;
+  padding-left: 30px;
+
+}
+.registrar{
+  text-align: center;
+  font-size: 16px;
+  color: #FFF;
+  border: none;
+  height: 40px;
+  margin-top: 50px;
+  line-height: 40px;
+
+}
+/*FORMULARIO- LOGIN*/
+form{
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+label, input{
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+label{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+input{
+  border-bottom: 2px solid #0DCAF0;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+
 
 /*FORMULARIO PROCESSOS*/
 
@@ -262,6 +318,51 @@
   background-color: #EEE;
 }
 
+/*PAGINA DE PESQUISA DE PROCESSOS*/
+#description-proccess-id{
+  background-color: #212;
+  color: #AAA;
+}
+.description-proccess-class{
+  margin: 30px;
+  background-color: #121212;
+  border-radius: 15px 15px 15px 15px;
+  padding: 30px;
+}
+.text-proccess{
+  padding: 20vh;
+  margin: 20vh;
+  height: 540px;
+  width: 1000px;
+  border-radius: 15px 15px 15px 15px;
+}
+.msg-button{
+  display:flex;
+  margin: 20px 500px;
+  padding: 20px;
+  width: 200px;
+  color: #fff ;
+  border-radius: 15px;
+  background-color: #685119;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.msg-button:hover{
+  border-color: #685119;
+    color: #685119;
+    background-color: #EEE;
+    transition: .5s;
+}
+iframe{
+  background-color: aliceblue;
+  color: #000;
+  font-size: 24px;
+  height: 400px;
+  width: 850px;
+}
+
 /*RESPONSIVO*/
 
 @media(max-width: 450px) {
@@ -343,6 +444,7 @@
   background-color: #FFF;
   border-radius: 5px;
   width: 50%;
+  height: 40px;
   margin-left: 300px;
  
 

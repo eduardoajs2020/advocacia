@@ -8,10 +8,10 @@
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
                     </li>   
                     <li>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
                     </li>                   
                 </ul>
             </div>
