@@ -17,7 +17,7 @@
   <body>
     <div id="form-container-senha">
         <span>
-            <form class="login-senha">
+            <form class="login-senha" form action="<?=$BASE_URL?>index.php" method="POST">
                 <div class="login-senha-1">
                     <label for="user">Informe o Usuário:</label>
                     <input type="text" name="user" placeholder="Usuário">

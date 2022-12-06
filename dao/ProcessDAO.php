@@ -1,12 +1,13 @@
 <?php
 
-require_once("models/Client.php");
 require_once("models/Message.php");
-require_once("models/processo.php");
-require_once("dao/ProcessoDAO.php");
+require_once("models/Processo.php");
+require_once("utils/db.php");
+require_once("globals.php");
+require_once("processo_filters.php");
 
 //Review DAO
-require_once("dao/ReviewDAO.php");
+//require_once("dao/ReviewDAO.php");
 class ProcessDAO implements ProcessDAOInterface{
 
     private $conn;
@@ -71,7 +72,7 @@ class ProcessDAO implements ProcessDAOInterface{
     public function getLatestProcess(){
         $process = [];
 
-        $stmt = $this->conn->query("SELECT * FROM process ORDER BY id DESC");
+        $stmt = $this->conn->query("SELECT * FROM processo ORDER BY id DESC");
 
         $stmt->execute();
 
@@ -91,7 +92,7 @@ class ProcessDAO implements ProcessDAOInterface{
 
           $process = [];
 
-        $stmt = $this->conn->prepare("SELECT * FROM  process
+        $stmt = $this->conn->prepare("SELECT * FROM  processo
                                      WHERE tipoAcao = :tipoAcao
                                     ORDER BY id DESC");
 
@@ -116,7 +117,7 @@ class ProcessDAO implements ProcessDAOInterface{
 
         $process = [];
 
-        $stmt = $this->conn->prepare("SELECT * FROM process
+        $stmt = $this->conn->prepare("SELECT * FROM processo
                                      WHERE users_id = :users_id");
 
         $stmt->bindParam(":users_id", $id);
@@ -140,7 +141,7 @@ class ProcessDAO implements ProcessDAOInterface{
 
         $$process = [];
 
-        $stmt = $this->conn->prepare("SELECT * FROM process
+        $stmt = $this->conn->prepare("SELECT * FROM processo
                                      WHERE id = :id");
 
         $stmt->bindParam(":id", $id);
@@ -168,7 +169,7 @@ class ProcessDAO implements ProcessDAOInterface{
 
         $process = [];
 
-        $stmt = $this->conn->prepare("SELECT * FROM process
+        $stmt = $this->conn->prepare("SELECT * FROM processo
                                      WHERE title LIKE :title");
 
         $stmt->bindValue(":title", '%'.$title.'%');
@@ -189,9 +190,36 @@ class ProcessDAO implements ProcessDAOInterface{
         return $process;
 }
 
+public function findBynomeCliente($nomeCliente)
+{
+
+        $process = [];
+
+        $stmt = $this->conn->prepare("SELECT * FROM processo
+                                     WHERE nomeCliente LIKE :nomeCliente");
+
+        $stmt->bindValue(":nomeCliente", '%'.$nomeCliente.'%');
+
+        $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+
+            $processArray = $stmt-> fetchAll();
+
+            foreach($processArray as $$process){
+                $process[] = $this->buildProcess($$process);
+            }
+
+
+
+        }
+        return $process;
+}
+
+
     public function create(Processo $process){
 
-        $stmt = $this->conn->prepare("INSERT INTO process(
+        $stmt = $this->conn->prepare("INSERT INTO processo(
             id, nProcesso, nomeAdvogado, oab, nomeCliente, cpf, cnpj, email, telefone, poloAtivo, poloPassivo, litisconsorte, tipoAcao, objetoAcao, vara, comarca, rito, foro, andar, area, fase, situacao, instancia, valorCausa, dataDistribuicao, dataBaixa, users_id
         )VALUES(
             :id, :nProcesso, :nomeAdvogado, :oab, :nomeCliente, :cpf, :cnpj, :email, :telefone, :poloAtivo, :poloPassivo, :litisconsorte, :tipoAcao, :objetoAcao, :vara, :comarca, :rito, :foro, :andar, :area, :fase, :situacao, :instancia, :valorCausa, :dataDistribuicao, :dataBaixa, :users_id
@@ -233,32 +261,32 @@ class ProcessDAO implements ProcessDAOInterface{
     public function update(Processo $process){
 
         $stmt=$this->conn->prepare("UPDATE $process SET
-            
-            nProcesso = :nProcesso, 
-            nomeAdvogado = :nomeAdvogado, 
-            oab = :oab, 
-            nomeCliente = :nomeCliente, 
-            cpf = :cpf, 
-            cnpj = :cnpj, 
-            email = :email, 
-            telefone = :telefone, 
-            poloAtivo = :poloAtivo, 
-            poloPassivo = :poloPassivo, 
-            litisconsorte = :litisconsorte, 
-            tipoAcao = :tipoAcao, 
-            objetoAcao = :objetoAcao, 
-            vara = :vara, 
-            comarca = :comarca, 
-            rito = :rito, 
-            foro = :foro, 
-            andar = :andar, 
-            area = :area, 
-            fase = :fase, 
-            situacao = :situacao, 
-            instancia = :instancia, 
-            valorCausa = :valorCausa, 
-            dataDistribuicao = :dataDistribuicao, 
-            dataBaixa = :dataBaixa, 
+
+            nProcesso = :nProcesso,
+            nomeAdvogado = :nomeAdvogado,
+            oab = :oab,
+            nomeCliente = :nomeCliente,
+            cpf = :cpf,
+            cnpj = :cnpj,
+            email = :email,
+            telefone = :telefone,
+            poloAtivo = :poloAtivo,
+            poloPassivo = :poloPassivo,
+            litisconsorte = :litisconsorte,
+            tipoAcao = :tipoAcao,
+            objetoAcao = :objetoAcao,
+            vara = :vara,
+            comarca = :comarca,
+            rito = :rito,
+            foro = :foro,
+            andar = :andar,
+            area = :area,
+            fase = :fase,
+            situacao = :situacao,
+            instancia = :instancia,
+            valorCausa = :valorCausa,
+            dataDistribuicao = :dataDistribuicao,
+            dataBaixa = :dataBaixa,
             users_id = : users_id
             WHERE id = :id
         ");
@@ -300,7 +328,7 @@ class ProcessDAO implements ProcessDAOInterface{
 
     public function destroy($id){
 
-        $stmt = $this->conn->prepare("DELETE FROM process WHERE id = :id");
+        $stmt = $this->conn->prepare("DELETE FROM processo WHERE id = :id");
 
         $stmt->bindParam(":id", $id);
 

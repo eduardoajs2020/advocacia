@@ -1,9 +1,10 @@
 <?php
-/*
-require_once("globals.php");
+
+/*require_once("globals.php");
 require_once("utils/db.php");
 require_once("models/Message.php");
-require_once("dao/UserDAO.php");
+require_once("dao/AdvogadosDAO.php");
+
 
 $message = new Message($BASE_URL);
 
@@ -15,9 +16,9 @@ if(!empty($flassMessage["msg"])){
 
 $userDao = new UserDAO($conn, $BASE_URL);
 
-$userData = $userDao->verifyToken();
+$userData = $userDao->verifyToken();*/
 
-*/
+
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,5 @@
 <?php 
- class Advogado{
+ class Advogados{
     
     public $id;
     public $oab;
@@ -27,19 +27,19 @@
         return bin2hex(random_bytes(60)). ".jpg";
     }
  }
-interface AdvogadoDAOInterface{
+interface AdvogadosDAOInterface{
 
-    public function buildUser($data);
-    public function create(User $user, $authUser = false);
-    public function update(User $user, $redirect = true);
+    public function buildAdvogados($data);
+    public function create(Advogados $advogado, $authUser = false);
+    public function update(Advogados $advogado, $redirect = true);
     public function verifyToken($protected = false);
     public function setTokenToSession($token, $redirect = true);
-    public function authenticateUser($email, $password);
+    public function authenticateAdvogado($email, $password);
     public function findByEmail($email);
     public function findById($id);
     public function findByToken($token);
     public function destroyToken();
-    public function changePassword(User $user);
+    public function changePassword(Advogados $advogado);
     
 }
 

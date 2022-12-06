@@ -32,7 +32,7 @@ $userMovies = $movieDao->getMoviesByUserId($userData->id);
                 <th scope="col" class="actions-column">Ações</th>
             </thead>
             <tbody>
-                <?php foreach($userMovies as $movie): ?>
+                <?php foreach($userProcess as $$process): ?>
                 <tr >
                     <td scope="row"><?=$movie->id?></td>
                     <td><a href="<?=$BASE_URL?>movie.php?id=<?=$movie->id?>" class="table-movie-title"><?=$movie->title?></a></td>
