@@ -13,8 +13,8 @@
         <div><a href="#"><p class="menu-sub-img">Layout</p></a></div>            
       </div>
       <div class="menu-2-activate">
-        <div><a href="#"><p class="menu-sub-img">Usuários</p></a></div>
-        <div><a href="#"><p class="menu-sub-img">Clientes</p></a></div>
+        <div><a href="advogados.php"><p class="menu-sub-img">Usuários</p></a></div>
+        <div><a href="clientes.php"><p class="menu-sub-img">Clientes</p></a></div>
         <div><a href="#"><p class="menu-sub-img">Recibos</p></a></div>
         <div><a href="#"><p class="menu-sub-img">Backup</p></a></div>
         <div><a href="#"><p class="menu-sub-img">Modelos</p></a></div>            

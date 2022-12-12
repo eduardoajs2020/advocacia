@@ -199,7 +199,12 @@ input{
 .teste-processo-2{
  display: flex;
 }
+/*CLIENTES/ADVOGADOS*/
 
+.button-form{
+  margin: 10px;
+  color: #00AD5E;
+}
 
 
 /*CONTAINERS*/
@@ -313,8 +318,8 @@ input{
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  width: 300px;
-  margin: 40px 10px;
+  width:190px;
+  margin: 20px 10px;
   border: 2px solid transparent;
   transition: .5s;
 }
