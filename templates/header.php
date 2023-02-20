@@ -27,25 +27,25 @@ $userData = $userDao->verifyToken();*/
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>T-Juris-Controller</title>
-        <link rel="short icon" href="<?= $BASE_URL?>/assets/img/justice-icon.jpg"/>
+        <link rel="short icon" href="assets/img/justice-icon.jpg"/>
         <!--Bootstrap do projeto -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.1/css/bootstrap.css" integrity="sha512-tBwPRcI1t+0jTsIMtf//+V1f0xAWHh7pvPE82A2n5FcBrzl6b0LRE6XnxUTRHti59y4Js7z4Wb/zal2HBsVVOQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!--FONT AWESOME-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!--CSS do projeto -->
-        <link rel="stylesheet" href="<?= $BASE_URL?>/assets/css/styles.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
     </head>
     <body>
         <header>
             <nav id="main-navbar" class="navbar navbar-expand-lg">
                 <a href="<?= $BASE_URL?>" class="navbar-brand">
-                <img src ="<?= $BASE_URL?>/assets/img/justice-logo.svg" alt="Justice" id="logo">
+                <img src ="assets/img/justice-logo.svg" alt="Justice" id="logo">
                 <span id="t-juris-title">T-Juris-Controller</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
                 </button>
-                <form action="<?= $BASE_URL ?>search.php" method="GET" id="search-form" class="form-inline my-2 my-lg-0">
+                <form action="search.php" method="GET" id="search-form" class="form-inline my-2 my-lg-0">
                     <input type="text" name="q" id="search" class="form-control mr-sm-2" type="search" placeholder="Buscar cliente/processo" aria-label="Search">
                     <button class="btn my-2 my-sm-0" type="submit">
                         <i class="fas fa-search"></i>
@@ -55,7 +55,7 @@ $userData = $userDao->verifyToken();*/
                     <ul class="navbar-nav">
                         <?php if($userData): ?>
                             <li class="nav-item">
-                        <a href="<?= $BASE_URL?>newmovie.php" class="nav-link">
+                        <a href="newmovie.php" class="nav-link">
                             <i class="far fa-plus-square"></i> Incluir Filme
                         </a>
                         </li>

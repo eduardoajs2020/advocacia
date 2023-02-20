@@ -13,7 +13,7 @@
       <!--formulario para contato -->
       <div id="form-container">
         <h2>Cadastro de Processos</h2>
-        <form id="contact-form" action="<?=$BASE_URL?>models/Processo.php" method="POST" enctype="multipart/form-data">
+        <form id="contact-form" action="models/Processo.php" method="POST" enctype="multipart/form-data">
           <input type="hidden" name="type" value="update">
           <div class="teste-processo">
             <label for="processo">Processo:</label>

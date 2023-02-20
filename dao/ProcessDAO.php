@@ -235,7 +235,7 @@ public function findBynomeCliente($nomeCliente)
             $stmt->bindParam(":telefone", $process->telefone);
             $stmt->bindParam(":poloAtivo", $process->poloAtivo);
             $stmt->bindParam(":poloPassivo", $process->poloPassivo);
-            $stmt->bindParam(":litisconsorte", $process->litisconsorte);
+            $stmt->bindParam(":listisconsorte", $process->listisconsorte);
             $stmt->bindParam(":tipoAcao", $process->tipoAcao);
             $stmt->bindParam(":objetoAcao", $process->objetoAcao);
             $stmt->bindParam(":vara", $process->vara);
@@ -301,7 +301,7 @@ public function findBynomeCliente($nomeCliente)
             $stmt->bindParam(":telefone", $process->telefone);
             $stmt->bindParam(":poloAtivo", $process->poloAtivo);
             $stmt->bindParam(":poloPassivo", $process->poloPassivo);
-            $stmt->bindParam(":litisconsorte", $process->litisconsorte);
+            $stmt->bindParam(":listisconsorte", $process->listisconsorte);
             $stmt->bindParam(":tipoAcao", $process->tipoAcao);
             $stmt->bindParam(":objetoAcao", $process->objetoAcao);
             $stmt->bindParam(":vara", $process->vara);
