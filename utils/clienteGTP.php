@@ -15,7 +15,7 @@
     <title>Chatbot</title>
     
   </head>
-  
+   
   <body class="bg-secondary bg-gradient">
     <div class="container-fluid">
 
@@ -113,5 +113,6 @@
             }
         }
     </script>
+    <a href="..\..\..\advocacia\index.php" class="retorno-btn">Retorno</a>
   </body>
 </html>

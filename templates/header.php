@@ -39,7 +39,7 @@ $userData = $userDao->verifyToken();*/
         <header>
             <nav id="main-navbar" class="navbar navbar-expand-lg">
                 <a href="<?= $BASE_URL?>" class="navbar-brand">
-                <img src ="assets/img/justice-logo.svg" alt="Justice" id="logo">
+                <img src ="/assets/img/justice-logo.svg" alt="Justice" id="logo">
                 <span id="t-juris-title">T-Juris-Controller</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,7 +70,7 @@ $userData = $userDao->verifyToken();*/
                         </li>
                         <?php else: ?>
                         <li class="nav-item">
-                        <a href="<?= $BASE_URL?>/utils/auth.php" class="nav-link">Entrar/ Cadastrar</a>
+                        <a href="<?= $BASE_URL?>utils/auth.php" class="nav-link">Entrar/ Cadastrar</a>
                         </li>
                         <?php endif; ?>
                     </ul>
