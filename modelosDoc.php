@@ -18,9 +18,9 @@
       <div class="menu-1-activate">
     
        <div><a href="\advocacia\assets\contratos\Contrato.html"><p class="menu-sub-img">Contratos</p></a></div>
-       <div><a href="\advocacia\assets\contratos\hipossuficiencia.html"><p class="menu-sub-img">Hipossuficiencia</p></a></div>
+       <div><a href="\advocacia\assets\contratos\hipossuficiencia.html"><p class="menu-sub-img">Hipossu- ficiencia</p></a></div>
        <div><a href="\advocacia\assets\contratos\Peticao_prescricao-divida.html"><p class="menu-sub-img">Petição: Divida</p></a></div>
-       <div><a href="\advocacia\assets\contratos\Procuracao.html"><p class="menu-sub-img">Procuração</p></a><div></div>
+       <div><a href="\advocacia\assets\contratos\Procuracao.html"><p class="menu-sub-img"> Procuração </p></a><div></div>
 
       </div>
     </div>

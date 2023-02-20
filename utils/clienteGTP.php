@@ -12,7 +12,9 @@
 
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <title>Chatbot</title>
+   
+    <title>T-Juris-Inteligence</title>
+    <link rel="stylesheet" href="/advocacia/assets/css/styles.css">
     
   </head>
    
@@ -20,11 +22,11 @@
     <div class="container-fluid">
 
       <div class="card card-primary text-center mt-4">
-        <div class="card-header text-white bg-primary bg-gradient">
-          Faça sua pergunta ao Bot
+        <div class="card-header">
+          Pergunte-me o que deseja saber:
         </div>
         <div class="card-body">
-          <div id="container-chat" class="position-relative" style="overflow-y:scroll; height: 420px;">
+          <div id="container-chat" class="position-relative" style="overflow-y:scroll; height: 360px;">
             
           </div>
         </div>
@@ -68,7 +70,7 @@
 
             var widget_mensagem = `<br><br><br><br><br><br>
                                    <div class="badge bg-${cor} bg-gradient text-wrap text-left position-absolute ${posicao}-0 start-0 mt-4">
-                                    <i class="bi bi-${icone}"style="font-size: 1rem; color: white;"></i>
+                                    <i class="bi bi-${icone}"style="font-size: 1rem; color: black;"></i>
                                     ${mensagem}
                                    </div>`;
 
