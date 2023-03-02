@@ -1,0 +1,288 @@
+Para consumir a API do link que você compartilhou via PHP, você precisará fazer uma solicitação HTTP GET usando a função file_get_contents() ou a extensão cURL do PHP.
+
+Aqui está um exemplo de como você pode consumir a API usando file_get_contents():
+
+
+// URL da API
+$url = 'https://gateway.cloud.pje.jus.br/tpu/api/v1/consulta-db-rest/pesquisarMovimentos';
+
+// Parâmetros da consulta
+$params = array(
+    'numeroProcesso' => '0000000-00.0000.0.00.0000',
+    'dataInicio' => '2022-01-01',
+    'dataFim' => '2022-02-01'
+);
+
+// Adiciona os parâmetros à URL da API
+$url .= '?' . http_build_query($params);
+
+// Faz a solicitação GET à API
+$response = file_get_contents($url);
+
+// Converte a resposta JSON para um array associativo
+$data = json_decode($response, true);
+
+// Exibe a resposta da API
+var_dump($data);
+
+
+
+
+Observe que, para adicionar os parâmetros à URL da API, usamos a função http_build_query() para formatar os parâmetros em uma string de consulta. O resultado é uma URL como esta:
+
+
+
+https://gateway.cloud.pje.jus.br/tpu/api/v1/consulta-db-rest/pesquisarMovimentos?numeroProcesso=0000000-00.0000.0.00.0000&dataInicio=2022-01-01&dataFim=2022-02-01
+
+
+
+Este exemplo assume que você está usando PHP 5 ou superior e que a extensão openssl está habilitada no seu servidor. Se você estiver usando uma versão anterior do PHP ou se a extensão openssl não estiver habilitada, você precisará usar a extensão cURL para fazer a solicitação HTTP.
+
+
+
+
+
+
+
+
+Para consumir a API do link que você compartilhou em Python, você pode usar a biblioteca requests.
+
+Aqui está um exemplo de como você pode consumir a API usando requests:
+
+
+
+
+
+import requests
+
+# URL da API
+url = 'https://gateway.cloud.pje.jus.br/tpu/api/v1/consulta-db-rest/pesquisarMovimentos'
+
+# Parâmetros da consulta
+params = {
+    'numeroProcesso': '0000000-00.0000.0.00.0000',
+    'dataInicio': '2022-01-01',
+    'dataFim': '2022-02-01'
+}
+
+# Faz a solicitação GET à API
+response = requests.get(url, params=params)
+
+# Converte a resposta JSON para um dicionário Python
+data = response.json()
+
+# Exibe a resposta da API
+print(data)
+
+
+
+
+
+Neste exemplo, estamos usando a função requests.get() para fazer a solicitação GET à API, passando a URL da API e os parâmetros da consulta como argumentos. Em seguida, convertemos a resposta JSON para um dicionário Python usando a função response.json().
+
+Observe que você precisará instalar a biblioteca requests antes de executar este código. Você pode instalá-la usando o pip, o gerenciador de pacotes do Python:
+
+
+pip install requests
+
+
+
+
+Este exemplo assume que você está usando Python 3 ou superior. Se você estiver usando Python 2, precisará modificar a sintaxe do código.
+
+
+
+
+
+
+https://gateway.cloud.pje.jus.br/tpu/swagger-ui.html#/consulta-detalhada-db-rest-controller/pesquisarMovimentosUsingGET_1
+
+
+
+https://insight.jusbrasil.com.br/
+
+
+
+https://www.cnj.jus.br/sistemas/api-cnj-automatizando-o-judiciario/
+
+
+
+https://intima.ai/servicos/perfil-judicial-eletronico
+
+
+https://infosimples.com/consultas/tribunal-tjsp/
+
+
+https://infosimples.com/consultas/
+
+
+
+https://www.loja.serpro.gov.br/consultacnpj
+
+
+https://apicenter.estaleiro.serpro.gov.br/documentacao/consulta-cnpj/pt/demonstracao-v2/
+
+
+https://cnpja.com/
+
+
+
+
+
+A API que você compartilhou é uma API REST que pode ser consumida em PHP e Python (ou em qualquer outra linguagem que suporte solicitações HTTP).
+
+https://gateway.cloud.pje.jus.br/tpu/swagger-ui.html#/consulta-db-rest-controller/pesquisarMovimentosUsingGET
+
+Para consumir a API em PHP, você pode usar a biblioteca curl. Aqui está um exemplo de como consumir a API usando curl em PHP:
+
+
+
+
+// URL da API
+$url = 'https://gateway.cloud.pje.jus.br/tpu/api/v1/consulta-db-rest/pesquisarMovimentos';
+
+// Parâmetros da consulta
+$params = array(
+    'numeroProcesso' => '0000000-00.0000.0.00.0000',
+    'dataInicio' => '2022-01-01',
+    'dataFim' => '2022-02-01'
+);
+
+// Inicializa a sessão cURL
+$ch = curl_init();
+
+// Define as opções da solicitação cURL
+curl_setopt($ch, CURLOPT_URL, $url . '?' . http_build_query($params));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// Faz a solicitação GET à API
+$response = curl_exec($ch);
+
+// Fecha a sessão cURL
+curl_close($ch);
+
+// Converte a resposta JSON para um objeto PHP
+$data = json_decode($response);
+
+// Exibe a resposta da API
+var_dump($data);
+
+
+
+
+
+Neste exemplo, estamos usando a função curl_init() para inicializar uma sessão cURL e a função curl_setopt() para definir as opções da solicitação cURL, incluindo a URL da API e os parâmetros da consulta. Em seguida, usamos a função curl_exec() para fazer a solicitação GET à API e a função curl_close() para fechar a sessão cURL. Finalmente, convertemos a resposta JSON para um objeto PHP usando a função json_decode().
+
+Para consumir a API em Python, você pode usar a biblioteca requests. Aqui está um exemplo de como consumir a API usando requests em Python:
+
+
+
+
+
+import requests
+
+# URL da API
+url = 'https://gateway.cloud.pje.jus.br/tpu/api/v1/consulta-db-rest/pesquisarMovimentos'
+
+# Parâmetros da consulta
+params = {
+    'numeroProcesso': '0000000-00.0000.0.00.0000',
+    'dataInicio': '2022-01-01',
+    'dataFim': '2022-02-01'
+}
+
+# Faz a solicitação GET à API
+response = requests.get(url, params=params)
+
+# Converte a resposta JSON para um dicionário Python
+data = response.json()
+
+# Exibe a resposta da API
+print(data)
+
+
+
+
+Neste exemplo, estamos usando a função requests.get() para fazer a solicitação GET à API, passando a URL da API e os parâmetros da consulta como argumentos. Em seguida, convertemos a resposta JSON para um dicionário Python usando a função response.json().
+
+
+
+
+
+
+
+Para consumir a API de consulta de CNPJ disponível em https://apicenter.estaleiro.serpro.gov.br/documentacao/consulta-cnpj/pt/demonstracao-v2/, você pode utilizar as seguintes abordagens em PHP e Python:
+
+
+
+
+PHP
+
+// URL da API
+$url = 'https://apicenter.estaleiro.serpro.gov.br/consulta-cnpj/v2';
+
+// Cabeçalho da requisição
+$headers = array(
+    'Authorization: Bearer {TOKEN DE AUTENTICAÇÃO}',
+    'Content-Type: application/json',
+);
+
+// Corpo da requisição
+$body = array(
+    'cnpj' => '00000000000191',
+);
+
+// Inicia a sessão cURL
+$ch = curl_init();
+
+// Define as opções da requisição
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+// Executa a requisição e armazena a resposta
+$response = curl_exec($ch);
+
+// Fecha a sessão cURL
+curl_close($ch);
+
+// Imprime a resposta da API
+echo $response;
+
+
+
+
+
+PYTHON
+
+import requests
+import json
+
+# URL da API
+url = 'https://apicenter.estaleiro.serpro.gov.br/consulta-cnpj/v2'
+
+# Cabeçalho da requisição
+headers = {
+    'Authorization': 'Bearer {TOKEN DE AUTENTICAÇÃO}',
+    'Content-Type': 'application/json',
+}
+
+# Corpo da requisição
+body = {
+    'cnpj': '00000000000191',
+}
+
+# Faz a solicitação POST à API
+response = requests.post(url, headers=headers, data=json.dumps(body))
+
+# Imprime a resposta da API
+print(response.text)
+
+
+
+
+Em ambos os exemplos, é necessário que você substitua o valor {TOKEN DE AUTENTICAÇÃO} pelo seu token de autenticação para a API, que pode ser obtido através do registro no portal do Serpro. Além disso, no corpo da requisição, você deve informar o CNPJ desejado.
+
+Observe que, para enviar os dados no corpo da requisição, é necessário utilizar a função json_encode em PHP ou a biblioteca json em Python, para transformar os dados em formato JSON.

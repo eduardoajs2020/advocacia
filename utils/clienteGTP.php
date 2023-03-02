@@ -14,10 +14,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
    
     <title>T-Juris-Inteligence</title>
-    <link rel="stylesheet" href="/advocacia/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    
     
   </head>
-   
+    
   <body class="bg-secondary bg-gradient">
     <div class="container-fluid">
 
@@ -26,7 +27,7 @@
           Pergunte-me o que deseja saber:
         </div>
         <div class="card-body">
-          <div id="container-chat" class="position-relative" style="overflow-y:scroll; height: 360px;">
+          <div id="container-chat" class="position-relative" style="overflow-y:scroll; height: 370px;">
             
           </div>
         </div>
@@ -115,6 +116,6 @@
             }
         }
     </script>
-    <a href="..\..\..\advocacia\index.php" class="retorno-btn">Retorno</a>
+    <a href="..\..\..\index.php" class="retorno-btn">Retorno</a>
   </body>
 </html>

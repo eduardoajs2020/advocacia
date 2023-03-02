@@ -38,4 +38,4 @@ e, inclusive, substabelecer no todo ou em parte o presente Mandato.<br>
 
 
 </p>
-<a href="..\..\..\advocacia\modelosDoc.php" class="retorno-btn">Retorno</a>
+<a href="..\..\..\modelosDoc.php" class="retorno-btn">Retorno</a>

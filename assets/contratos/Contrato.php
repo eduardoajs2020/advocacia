@@ -79,4 +79,4 @@ TESTEMUNHAS:
 <p>1-______________________________	<br><br><br>2-______________________________</p><br><br><br>
 
 
-<a href="..\..\..\advocacia\modelosDoc.php" class="retorno-btn">Retorno</a>
+<a href="..\..\..\modelosDoc.php" class="retorno-btn">Retorno</a>

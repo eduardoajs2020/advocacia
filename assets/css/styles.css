@@ -10,6 +10,7 @@
   background-color: #212;
 }
 
+
 .menu-1-activate{
   display: inline-block;
     margin-top: 5px;
@@ -52,7 +53,7 @@
   display: flex;
   flex-direction:row;
   justify-content: flex;
-  background-image: url("/advocacia/assets/img/fundo-justice.jpg");
+  background-image: url("/assets/img/fundo-justice.jpg");
   image-rendering: auto;
   margin: 30px;
   padding: 50px;
@@ -635,14 +636,6 @@ iframe{
 
 }
 
-.retorno-btn,
-#retorno-btn{
-text-decoration: none;
-background-color: #0f5132;
-color: #CCC;
-border-radius: 10px;
-}
-
 /*Edit profile */
 #profile-image-container,
 .profile-image-container {
@@ -964,9 +957,20 @@ background-color: #212;
 }
 
 .retorno-btn{
+  display: flex;
   background-color: #685119;
+  text-decoration: none;
+  color: #EEE;
   padding: 20px;
-  margin-bottom: -10px;
+  border-radius: 10px;
+  margin: 10px;
+  position: absolute;
+}
+
+.retorno-btn a:hover {
+  text-decoration: none;
+  background-color: #444;
+    
 }
 
 /* Responsivo */

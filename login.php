@@ -14,7 +14,7 @@
   <body>
     <div id="form-container-senha">
         <span>
-            <form class="login-senha" form action="<?=$BASE_URL?>index.php" method="POST">
+            <form class="login-senha" form action="<?=$BASE_URL?>principal.php" method="POST">
                 <div class="login-senha-1">
                     <label for="user">Informe o Usuário:</label>
                     <input type="text" name="user" placeholder="Usuário">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="login-senha-button">
                    
-                    <a href="<?=$BASE_URL?>index.php" class="login-senha-button-2"><span>Login</span></a>            
+                    <a href="<?=$BASE_URL?>principal.php" class="login-senha-button-2"><span>Login</span></a>            
                 </div>
                 <div id="register">
                     <p>Ainda não tem Cadastro?</p>

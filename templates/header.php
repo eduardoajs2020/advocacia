@@ -39,7 +39,7 @@ $userData = $userDao->verifyToken();*/
         <header>
             <nav id="main-navbar" class="navbar navbar-expand-lg">
                 <a href="index.php" class="navbar-brand">
-                <img src ="/advocacia/assets/img/justice-logo.svg" alt="Justice" id="logo">
+                <img src ="/assets/img/justice-logo.svg" alt="Justice" id="logo">
                 <span id="t-juris-title">T-Juris-Controller</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">

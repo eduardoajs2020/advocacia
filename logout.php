@@ -1,8 +1,27 @@
-<?php
-require_once("templates/header.php");
+<head>
+    <?php
+    require_once("templates/header.php");
+    ?>
 
-if($userDao){
+</head>
+
+
+<body>
+
+    <?php
+
+    if($userDao){
     $userDao->destroyToken();
 }
+    ?>
 
-?>
+</body>
+
+<footer>
+    <?php 
+    require_once("templates/header.php");
+    ?>
+</footer>
+
+
+
