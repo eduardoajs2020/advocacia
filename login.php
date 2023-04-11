@@ -7,34 +7,38 @@
     <link rel="stylesheet" href="assets/css/styles.css">
   </head>
   <header>
-    <?php 
+    <?php
         require_once("templates/header.php");
     ?>
   </header>
   <body>
     <div id="form-container-senha">
         <span>
-            <form class="login-senha" form action="<?=$BASE_URL?>principal.php" method="POST">
+            <form class="login-senha">
                 <div class="login-senha-1">
-                    <label for="user">Informe o Usuário:</label>
-                    <input type="text" name="user" placeholder="Usuário">
-                </div>
+                    <label for="username">Informe o Usuário:</label>
+                    <input type="text" name="username" placeholder="Usuário" required>
+                    </div>
                 <div class="login-senha-2">
                     <label for="senha">Informe a senha:</label>
-                    <input type="password" name="senha" placeholder="Senha">
+                    <input type="password" name="password" placeholder="Senha" required>
+                </div>
+                <div class="login-senha-2">
+                    <label for="senha">Confirme a senha:</label>
+                    <input type="password" name="confirm_password" placeholder="Confirme a Senha" required>
                 </div>
                 <div>
                     <a href="#" id="forgot-pass">Esqueceu a senha?</a>
                 </div>
                 <div class="login-senha-button">
-                   
-                    <a href="<?=$BASE_URL?>principal.php" class="login-senha-button-2"><span>Login</span></a>            
+
+                    <a href="/autenticator_main.php" class="login-senha-button-2"><span>Login</span></a>
                 </div>
                 <div id="register">
                     <p>Ainda não tem Cadastro?</p>
-                    <a href="#" class="registrar">Registrar</a>
+                    <a href="new_user.php" class="registrar">Registrar</a>
                 </div>
-            
+
             </form>
         </span>
     </div>
@@ -42,7 +46,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </body>
   <footer>
-    <?php 
+    <?php
         require_once("templates/footer.php");
     ?>
   </footer>

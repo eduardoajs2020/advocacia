@@ -1,0 +1,79 @@
+Para fazer um login com senha em PHP, é necessário seguir alguns passos básicos:
+
+Criar um formulário HTML com campos para usuário e senha;
+Receber as informações do formulário através de uma requisição POST;
+Verificar se o usuário existe no banco de dados e se a senha está correta;
+Criar uma sessão para o usuário, caso a autenticação seja bem-sucedida;
+Redirecionar o usuário para a página de destino.
+Abaixo, segue um exemplo de código que pode ser utilizado para criar um sistema de login com senha em PHP:
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+</head>
+<body>
+	<h1>Login</h1>
+	<form action="login.php" method="post">
+		<label for="username">Usuário:</label>
+		<input type="text" name="username" id="username" required>
+		<br>
+		<label for="password">Senha:</label>
+		<input type="password" name="password" id="password" required>
+		<br>
+		<input type="submit" value="Entrar">
+	</form>
+</body>
+</html>
+
+
+No arquivo login.php, é possível utilizar o seguinte código para processar a requisição POST e autenticar o usuário:
+
+
+<?php
+session_start();
+ 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+ 
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+ 
+    // Conectar ao banco de dados
+    $servername = "localhost";
+    $database = "meu_banco_de_dados";
+    $username_db = "meu_usuario";
+    $password_db = "minha_senha";
+ 
+    $conn = new mysqli($servername, $username_db, $password_db, $database);
+ 
+    if ($conn->connect_error) {
+        die("Conexão falhou: " . $conn->connect_error);
+    }
+ 
+    // Verificar se o usuário existe e se a senha está correta
+    $sql = "SELECT * FROM usuarios WHERE username = '$username'";
+    $result = $conn->query($sql);
+ 
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+        if (password_verify($password, $row["password"])) {
+            // Autenticação bem-sucedida
+            $_SESSION["loggedin"] = true;
+            $_SESSION["username"] = $username;
+            header("location: home.php");
+        } else {
+            echo "Senha incorreta.";
+        }
+    } else {
+        echo "Usuário não encontrado.";
+    }
+ 
+    $conn->close();
+}
+?>
+
+
+Neste exemplo, é utilizado o método password_verify() para verificar se a senha digitada pelo usuário é igual à senha armazenada no banco de dados. É importante notar que a senha deve ser armazenada no banco de dados utilizando a função password_hash(), para garantir a segurança das informações.
+

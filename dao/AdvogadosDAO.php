@@ -21,11 +21,20 @@ class AdvogadosDAO implements AdvogadosDAOInterface{
         $advogado = new Advogados();
 
         $advogado->id = $data["id"];
-        $advogado->name = $data["name"];
-        $advogado->lastname = $data["lastname"];
+        $advogado->nome = $data["nome"];
+        $advogado->sobrenome = $data["sobrenome"];
+        $advogado->oab = $data["oab"];
+        $advogado->telefone = $data["telefone"];
+        $advogado->endereco = $data["endereco"];
+        $advogado->numero_endereco = $data["numero_endereco"];
+        $advogado->cep = $data["cep"];
+        $advogado->cidade = $data["cidade"];
+        $advogado->estado = $data["estado"];
         $advogado->email = $data["email"];
         $advogado->password = $data["password"];
-        $advogado->image = $data["image"];
+        $advogado->imagem = $data["image"];
+        $advogado->locais_atuacao = $data["locais_atuacao"];
+        $advogado->nivel_autoridade = $data["nivel_autoridade"];
         $advogado->bio = $data["bio"];
         $advogado->token = $data["token"];
 
@@ -34,11 +43,11 @@ class AdvogadosDAO implements AdvogadosDAOInterface{
     }
     public function create(Advogados $advogado, $authUser = false){
 
-        $stmt = $this->conn->prepare("INSERT INTO users(name, lastname, email, password, token)VALUES(
-            :name, :lastname, :email, :password, :token)");
+        $stmt = $this->conn->prepare("INSERT INTO users(nome, sobrenome, email, password, token)VALUES(
+            :nome, :sobrenome, :email, :password, :token)");
 
-        $stmt->bindParam(":name", $advogado->name);
-        $stmt->bindParam(":lastname", $advogado->lastname);
+        $stmt->bindParam(":nome", $advogado->nome);
+        $stmt->bindParam(":lastname", $advogado->sobrenome);
         $stmt->bindParam(":email", $advogado->email);
         $stmt->bindParam(":password", $advogado->password);
         $stmt->bindParam(":token", $$advogado->token);
@@ -63,10 +72,10 @@ class AdvogadosDAO implements AdvogadosDAOInterface{
         WHERE id = :id
         ");
 
-        $stmt->bindParam(":name", $advogado->name);
-        $stmt->bindParam(":lastname", $advogado->lastname);
+        $stmt->bindParam(":name", $advogado->nome);
+        $stmt->bindParam(":sobrenome", $advogado->sobrenome);
         $stmt->bindParam(":email", $advogado->email);
-        $stmt->bindParam(":image", $advogado->image);
+        $stmt->bindParam(":image", $advogado->imagem);
         $stmt->bindParam(":bio", $advogado->bio);
         $stmt->bindParam(":token", $advogado->token);
         $stmt->bindParam(":id", $advogado->id);

@@ -18,8 +18,8 @@
             <div id="footer-links-container">
                 <ul>
                     <li><a href="#"> Adicionar Cliente</a></li>
-                    <li><a href="#"> Adicionar Responsável</a></li>
-                    <li><a href="#"> Entrar / Registrar</a></li>
+                    <li><a href="new_user.php"> Adicionar Responsável</a></li>
+                    <li><a href="login.php"> Entrar / Registrar</a></li>
                 </ul>
             </div>
             <p>&copy; 2022 Tronco Systems</p>

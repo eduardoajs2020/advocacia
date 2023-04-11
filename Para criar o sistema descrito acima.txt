@@ -1,0 +1,106 @@
+Para criar o sistema descrito acima no Flask, você pode seguir os seguintes passos:
+
+from flask import Flask, request, jsonify
+import pyodbc
+
+Instalar o Flask e o PyODBC:
+Abra o terminal do seu sistema operacional e digite os seguintes comandos para instalar o Flask e o PyODBC:
+
+Copy code
+pip install Flask
+pip install pyodbc
+Criar o banco de dados no SQL Server:
+Abra o SQL Server Management Studio e crie um novo banco de dados com o nome "exemplo". Em seguida, crie uma nova tabela com o nome "registros" e com as seguintes colunas:
+
+id (INT, Primary Key, Identity)
+nome (VARCHAR(50))
+idade (INT)
+Criar o arquivo app.py:
+Crie um arquivo chamado "app.py" na raiz do seu projeto e adicione o seguinte código:
+
+python
+Copy code
+from flask import Flask, jsonify, request
+import pyodbc
+
+# Conexão com o banco de dados
+server = 'SERVIDOR'
+database = 'exemplo'
+username = 'USUARIO'
+password = 'SENHA'
+conn_str = f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}"
+conn = pyodbc.connect(conn_str)
+
+# Criação da aplicação Flask
+app = Flask(__name__)
+
+# Rota para adicionar um registro
+@app.route('/registros', methods=['POST'])
+def adicionar_registro():
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO registros (nome, idade) VALUES (?, ?)", request.json['nome'], request.json['idade'])
+    cursor.commit()
+    cursor.close()
+    return jsonify({'mensagem': 'Registro adicionado com sucesso.'})
+
+# Rota para atualizar um registro
+@app.route('/registros/<int:id>', methods=['PUT'])
+def atualizar_registro(id):
+    cursor = conn.cursor()
+    cursor.execute("UPDATE registros SET nome=?, idade=? WHERE id=?", request.json['nome'], request.json['idade'], id)
+    cursor.commit()
+    cursor.close()
+    return jsonify({'mensagem': 'Registro atualizado com sucesso.'})
+
+# Rota para excluir um registro
+@app.route('/registros/<int:id>', methods=['DELETE'])
+def excluir_registro(id):
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM registros WHERE id=?", id)
+    cursor.commit()
+    cursor.close()
+    return jsonify({'mensagem': 'Registro excluído com sucesso.'})
+
+# Rota para exibir os registros
+@app.route('/registros', methods=['GET'])
+def exibir_registros():
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM registros")
+    registros = []
+    for registro in cursor.fetchall():
+        registros.append({
+            'id': registro[0],
+            'nome': registro[1],
+            'idade': registro[2]
+        })
+    cursor.close()
+    return jsonify(registros)
+
+# Execução da aplicação
+if __name__ == '__main__':
+    app.run(debug=True)
+Executar a aplicação:
+No terminal, navegue até o diretório onde o arquivo "app.py" está salvo e execute o seguinte comando:
+
+Copy code
+python app.py
+Isso iniciará o servidor Flask em modo de depuração. Agora, você pode acessar as rotas da sua aplicação em "http://localhost:5000".
+
+
+Teste o sistema. Você pode testar o sistema utilizando uma ferramenta de requ
+
+
+ partir daí, você poderá realizar as seguintes operações:
+
+Adicionar um registro: preencha o nome e a idade no formulário e clique no botão "Adicionar".
+Atualizar um registro: preencha o ID, o nome e a idade no formulário e clique no botão "Atualizar".
+Excluir um registro: preencha o ID no formulário e clique no botão "Excluir".
+Exibir registros: clique no botão "Exibir" para ver todos os registros na tabela.
+Além disso, você pode usar ferramentas como o Postman para realizar as operações via API REST, utilizando as rotas definidas no arquivo "app.py".
+
+
+
+
+
+
+

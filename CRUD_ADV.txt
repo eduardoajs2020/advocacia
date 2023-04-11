@@ -1,0 +1,172 @@
+Claro! Aqui está um exemplo básico de implementação CRUD em PHP puro, sem a utilização de qualquer framework:
+
+
+
+Conexão com o banco de dados:
+
+
+<?php
+// Definir as informações de conexão com o banco de dados
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "advocacia";
+
+// Conectar ao banco de dados
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar se a conexão foi bem sucedida
+if ($conn->connect_error) {
+    die("Conexão falhou: " . $conn->connect_error);
+}
+?>
+
+
+
+
+
+Criação de um novo registro na tabela "Advogados":
+
+
+
+
+
+<?php
+// Receber os dados do formulário
+$nome = $_POST['nome'];
+$oab = $_POST['oab'];
+$email = $_POST['email'];
+$telefone = $_POST['telefone'];
+$locais_de_atuacao = $_POST['locais_de_atuacao'];
+
+// Inserir os dados na tabela "Advogados"
+$sql = "INSERT INTO advogados (nome, oab, email, telefone, locais_de_atuacao)
+        VALUES ('$nome', '$oab', '$email', '$telefone', '$locais_de_atuacao')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Novo registro criado com sucesso";
+} else {
+    echo "Erro ao criar novo registro: " . $conn->error;
+}
+
+// Fechar a conexão com o banco de dados
+$conn->close();
+?>
+
+
+Obtenção de um registro específico na tabela "Advogados":
+
+
+
+
+<?php
+// Receber o ID do registro a ser recuperado
+$id = $_GET['id'];
+
+// Buscar o registro na tabela "Advogados"
+$sql = "SELECT * FROM advogados WHERE id = '$id'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Converter o resultado em um objeto
+    $row = $result->fetch_assoc();
+
+    // Retornar os dados em formato JSON
+    header('Content-Type: application/json');
+    echo json_encode($row);
+} else {
+    echo "Registro não encontrado";
+}
+
+// Fechar a conexão com o banco de dados
+$conn->close();
+?>
+
+
+
+Atualização de um registro na tabela "Advogados":
+
+
+
+<?php
+// Receber os dados do formulário
+$id = $_POST['id'];
+$nome = $_POST['nome'];
+$oab = $_POST['oab'];
+$email = $_POST['email'];
+$telefone = $_POST['telefone'];
+$locais_de_atuacao = $_POST['locais_de_atuacao'];
+
+// Atualizar os dados na tabela "Advogados"
+$sql = "UPDATE advogados SET nome = '$nome', oab = '$oab', email = '$email', telefone = '$telefone', locais_de_atuacao = '$locais_de_atuacao'
+        WHERE id = '$id'";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Registro atualizado com sucesso";
+} else {
+    echo "Erro ao atualizar registro: " . $conn->error;
+}
+
+// Fechar a conexão com o banco de dados
+$conn->close();
+?>
+
+
+
+
+Claro! Aqui está um exemplo básico de como você poderia fazer uma conexão PDO com um banco de dados MySQL usando PHP puro:
+
+
+
+
+<?php
+
+// Define as credenciais de acesso ao banco de dados
+$host = 'localhost';
+$dbname = 'nomedobanco';
+$username = 'usuario';
+$password = 'senha';
+
+// Cria uma conexão PDO
+try {
+  $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+  echo 'Erro ao conectar ao banco de dados: ' . $e->getMessage();
+  exit();
+}
+
+// Realiza alguma operação no banco de dados, como uma consulta
+$stmt = $pdo->query('SELECT * FROM tabela');
+
+// Percorre os resultados da consulta
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+  echo $row['campo1'] . ' - ' . $row['campo2'] . '<br>';
+}
+
+// Fecha a conexão com o banco de dados
+$pdo = null;
+
+
+
+
+Executar scripts Python a partir do PHP: uma maneira simples de integrar Python e PHP é executar um script Python a partir do PHP usando a função 'shell_exec(). Por exemplo, você pode usar o seguinte código PHP para chamar um script Python que realiza uma tarefa específica:
+
+
+
+<?php
+$result = shell_exec("python /caminho/do/script.py argumentos");
+echo $result;
+?>
+
+
+
+
+Executar scripts PHP a partir do Python: outra abordagem é executar scripts PHP a partir do Python usando a biblioteca 'subprocess
+
+
+import subprocess
+
+result = subprocess.run(['php', '/caminho/do/script.php', 'argumentos'], stdout=subprocess.PIPE)
+print(result.stdout.decode())
+

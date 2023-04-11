@@ -1,0 +1,115 @@
+Para criar um login com certificado digital em Python ou PySimpleGUI, você pode utilizar a biblioteca pyOpenSSL. Abaixo segue um exemplo simples de como criar um login utilizando um certificado digital:
+
+
+
+import PySimpleGUI as sg
+import OpenSSL.crypto as crypto
+
+sg.theme('LightGrey1')
+
+# Layout da janela de login
+layout = [
+    [sg.Text('Certificado Digital:'), sg.Input(key='certificado', enable_events=True), sg.FileBrowse()],
+    [sg.Text('Senha:'), sg.Input(key='senha', password_char='*')],
+    [sg.Button('Entrar'), sg.Button('Cancelar')]
+]
+
+# Criação da janela de login
+window = sg.Window('Login', layout)
+
+# Loop principal da aplicação
+while True:
+    event, values = window.read()
+
+    # Tratamento do evento de saída
+    if event == sg.WINDOW_CLOSED or event == 'Cancelar':
+        break
+
+    # Tratamento do evento de seleção do certificado digital
+    if event == 'certificado':
+        try:
+            # Abertura do arquivo do certificado digital
+            with open(values['certificado'], 'rb') as cert_file:
+                cert_data = cert_file.read()
+
+            # Leitura do certificado digital
+            cert = crypto.load_certificate(crypto.FILETYPE_PEM, cert_data)
+
+            # Exibição do nome comum do certificado digital
+            sg.popup(f'Certificado Digital: {cert.get_subject().CN}')
+        except:
+            sg.popup('Arquivo de certificado inválido.')
+
+    # Tratamento do evento de login
+    if event == 'Entrar':
+        try:
+            # Validação do certificado digital
+            with open(values['certificado'], 'rb') as cert_file:
+                cert_data = cert_file.read()
+
+            cert = crypto.load_certificate(crypto.FILETYPE_PEM, cert_data)
+            key = crypto.load_privatekey(crypto.FILETYPE_PEM, cert_data)
+
+            crypto.verify(cert, values['senha'].encode('utf-8'), key, 'sha256')
+            
+            # Exibição da mensagem de sucesso
+            sg.popup('Login efetuado com sucesso.')
+            break
+        except:
+            # Exibição da mensagem de erro
+            sg.popup('Certificado digital ou senha inválidos.')
+
+
+Esse código cria uma janela de login com a opção de seleção de um certificado digital e um campo para digitar a senha. Ao clicar no botão "Entrar", o certificado digital é validado e a senha é verificada. Se as informações estiverem corretas, uma mensagem de sucesso é exibida e o loop da aplicação é encerrado. Caso contrário, uma mensagem de erro é exibida.
+
+=========================================================================================================================
+
+
+Instale o pacote do OpenSSL em seu servidor web.
+Crie um par de chaves pública e privada para o seu servidor.
+Configure o servidor web para usar o certificado digital.
+Configure o servidor para exigir um certificado do cliente.
+Use a extensão OpenSSL do PHP para verificar o certificado do cliente.
+Para ajudar nesse processo, aqui está um exemplo básico de código PHP que usa a extensão OpenSSL para verificar o certificado do cliente:
+
+
+<?php
+// Verifica se a conexão é segura
+if($_SERVER["HTTPS"] !== "on") {
+    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+    exit();
+}
+
+// Verifica se um certificado foi enviado pelo cliente
+if(!isset($_SERVER["SSL_CLIENT_CERT"])) {
+    header("HTTP/1.1 401 Unauthorized");
+    header("Content-Type: text/plain");
+    die("Acesso negado. É necessário fornecer um certificado válido.");
+}
+
+// Converte o certificado enviado pelo cliente em um objeto X.509
+$cert = openssl_x509_read($_SERVER["SSL_CLIENT_CERT"]);
+
+// Verifica se o certificado é válido
+if($cert === false) {
+    header("HTTP/1.1 401 Unauthorized");
+    header("Content-Type: text/plain");
+    die("Acesso negado. O certificado enviado é inválido.");
+}
+
+// Verifica se o certificado pertence a um usuário válido
+$subject = openssl_x509_parse($cert);
+$username = $subject["commonName"];
+if($username !== "usuario") {
+    header("HTTP/1.1 401 Unauthorized");
+    header("Content-Type: text/plain");
+    die("Acesso negado. O certificado enviado não pertence a um usuário válido.");
+}
+
+// Se chegou até aqui, o certificado é válido e pertence ao usuário correto
+echo "Bem-vindo, $username!";
+?>
+
+
+
+Este é apenas um exemplo básico de como usar certificados digitais em PHP. Lembre-se de que a configuração do servidor pode variar dependendo do ambiente em que você está trabalhando e do tipo de certificado digital que está sendo usado.

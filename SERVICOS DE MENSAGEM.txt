@@ -1,0 +1,237 @@
+Para criar uma forma de enviar um e-mail ou uma mensagem do WhatsApp em caso de alteração de um dado em um banco de dados, você pode criar um procedimento armazenado no banco de dados que verifica se os dados foram alterados e, em seguida, envia uma mensagem de notificação.
+
+Aqui está um exemplo de como você pode criar um procedimento armazenado em SQL Server que envia uma mensagem por e-mail sempre que o sobrenome de um cliente é alterado na tabela clientes:
+
+
+
+CREATE PROCEDURE NotificarMudancaSobrenome
+    @clienteId INT,
+    @novoSobrenome VARCHAR(50)
+AS
+BEGIN
+    -- Verifica se o sobrenome foi alterado
+    IF UPDATE(sobrenome)
+    BEGIN
+        -- Monta a mensagem de notificação
+        DECLARE @mensagem VARCHAR(MAX);
+        SET @mensagem = 'O sobrenome do cliente ' + CAST(@clienteId AS VARCHAR) + ' foi alterado para ' + @novoSobrenome;
+
+        -- Envia a mensagem por e-mail
+        EXEC msdb.dbo.sp_send_dbmail 
+            @profile_name = 'NomeDoPerfilDeEmail',
+            @recipients = 'endereco@email.com',
+            @subject = 'Notificação de mudança de sobrenome',
+            @body = @mensagem;
+    END
+END;
+
+Observe que você precisará configurar um perfil de e-mail válido no SQL Server e conceder permissões para o procedimento armazenado executar o comando sp_send_dbmail.
+
+Se você deseja enviar mensagens do WhatsApp em vez de e-mails, pode usar uma API de terceiros para enviar mensagens programaticamente. Por exemplo, a API do Twilio permite enviar mensagens de WhatsApp por meio de sua plataforma. Você precisará se inscrever para uma conta e configurar a API em seu código.
+
+
+
+Claro, você também pode criar uma função em PHP usando PDO que verifica se os dados foram alterados no banco de dados e, em seguida, envia uma mensagem de notificação por e-mail ou WhatsApp.
+
+Aqui está um exemplo de como você pode criar uma função em PHP usando PDO que verifica se o sobrenome de um cliente foi alterado na tabela clientes e, em seguida, envia uma mensagem de notificação por e-mail:
+
+
+function notificarMudancaSobrenome($clienteId, $novoSobrenome) {
+    // Conecta ao banco de dados usando PDO
+    $dsn = 'mysql:host=localhost;dbname=nomedobanco';
+    $username = 'usuario';
+    $password = 'senha';
+    $options = array(
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    );
+    $pdo = new PDO($dsn, $username, $password, $options);
+
+    // Verifica se o sobrenome foi alterado
+    $query = "SELECT sobrenome FROM clientes WHERE id = :clienteId";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':clienteId', $clienteId);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($row['sobrenome'] != $novoSobrenome) {
+        // Monta a mensagem de notificação
+        $mensagem = 'O sobrenome do cliente ' . $clienteId . ' foi alterado para ' . $novoSobrenome;
+
+        // Envia a mensagem por e-mail
+        $to = 'endereco@email.com';
+        $subject = 'Notificação de mudança de sobrenome';
+        $headers = 'From: seuemail@dominio.com';
+        mail($to, $subject, $mensagem, $headers);
+    }
+}
+
+
+
+Observe que neste exemplo, a função usa a função mail() do PHP para enviar a mensagem de e-mail. Você precisará configurar o servidor de e-mail em seu ambiente PHP para que a função mail() funcione corretamente.
+
+Se você deseja enviar mensagens do WhatsApp em vez de e-mails, pode usar uma API de terceiros para enviar mensagens programaticamente. Por exemplo, a API do Twilio permite enviar mensagens de WhatsApp por meio de sua plataforma. Você precisará se inscrever para uma conta e configurar a API em seu código PHP.
+
+
+
+
+Para verificar o andamento processual, você precisará acessar o site do tribunal ou do órgão responsável e obter as informações necessárias, como número do processo e data de audiência, por exemplo. Depois disso, você pode criar uma função em PHP que verifica periodicamente o status do processo e, em seguida, envia uma notificação por e-mail ou WhatsApp quando ocorrerem mudanças.
+
+Aqui está um exemplo de como você pode criar uma função em PHP que verifica o andamento processual e envia uma notificação por e-mail, WhatsApp, Telegram e SMS para o cliente:
+
+
+
+function notificarAndamentoProcessual($numeroProcesso, $dataAudiencia, $clienteEmail, $clienteTelefone) {
+    // Conecta ao banco de dados usando PDO
+    $dsn = 'mysql:host=localhost;dbname=nomedobanco';
+    $username = 'usuario';
+    $password = 'senha';
+    $options = array(
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    );
+    $pdo = new PDO($dsn, $username, $password, $options);
+
+    // Verifica o andamento processual
+    $url = 'http://www.exemplo.com.br/andamento?numero=' . $numeroProcesso . '&data=' . $dataAudiencia;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $html = curl_exec($ch);
+    curl_close($ch);
+
+    // Analisa o HTML e extrai as informações necessárias
+    $status = 'desconhecido'; // Valor padrão em caso de falha na análise do HTML
+    $resultado = preg_match('/<div class="status">(.+)<\/div>/', $html, $matches);
+    if ($resultado) {
+        $status = $matches[1];
+    }
+
+    // Verifica se houve mudança no status e envia as notificações
+    $query = "SELECT status_processual FROM clientes WHERE numero_processo = :numeroProcesso AND data_audiencia = :dataAudiencia";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':numeroProcesso', $numeroProcesso);
+    $stmt->bindParam(':dataAudiencia', $dataAudiencia);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($row['status_processual'] != $status) {
+        // Atualiza o status no banco de dados
+        $query = "UPDATE clientes SET status_processual = :status WHERE numero_processo = :numeroProcesso AND data_audiencia = :dataAudiencia";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':status', $status);
+        $stmt->bindParam(':numeroProcesso', $numeroProcesso);
+        $stmt->bindParam(':dataAudiencia', $dataAudiencia);
+        $stmt->execute();
+
+        // Monta a mensagem de notificação
+        $mensagem = 'O status do processo ' . $numeroProcesso . ' para a audiência de ' . $dataAudiencia . ' foi alterado para ' . $status;
+
+        // Envia a notificação por e-mail
+        $to = $clienteEmail;
+        $subject = 'Notificação de mudança de status do processo';
+        $headers = 'From: seuemail@dominio.com';
+        mail($to, $subject, $mensagem, $headers);
+
+        // Envia a notificação por WhatsApp
+    // Envia a notificação por WhatsApp
+    $url = 'https://api.whatsapp.com/send?phone=' . $clienteTelefone . '&text=' . urlencode($mensagem);
+    header('Location: ' . $url);
+    exit;
+
+    // Envia a notificação por Telegram
+    // Precisa da biblioteca "telegram-bot-sdk" (https://github.com/irazasyed/telegram-bot-sdk)
+    $telegram = new \TelegramBot\Api\Client('seu_token');
+    $telegram->sendMessage($clienteIdTelegram, $mensagem);
+
+    // Envia a notificação por SMS
+    // Precisa de uma conta em um serviço de envio de SMS, como o Twilio (https://www.twilio.com)
+    require __DIR__ . '/vendor/autoload.php';
+    use Twilio\Rest\Client;
+    $accountSid = 'seu_account_sid';
+    $authToken = 'seu_auth_token';
+    $client = new Client($accountSid, $authToken);
+    $client->messages->create(
+        $clienteTelefone,
+        array(
+            'from' => 'seu_numero_twilio',
+            'body' => $mensagem
+        )
+    );
+}
+
+
+
+Esta função usa o PDO para se conectar ao banco de dados e verificar se houve mudança no status do processo. Se houver, ele atualiza o banco de dados, monta uma mensagem de notificação e a envia por e-mail, WhatsApp, Telegram e SMS. Note que a parte de enviar notificações por WhatsApp e Telegram precisa de bibliotecas específicas e a parte de enviar notificações por SMS precisa de uma conta em um serviço de envio de SMS, como o Twilio.
+
+
+Para enviar notificações por e-mail, você pode usar a biblioteca PHPMailer (https://github.com/PHPMailer/PHPMailer). Veja um exemplo de como enviar um e-mail:
+
+
+require __DIR__ . '/vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+$email = new PHPMailer(true);
+try {
+    // Configurações do servidor SMTP
+    $email->SMTPDebug = 0;
+    $email->isSMTP();
+    $email->Host = 'smtp.gmail.com';
+    $email->SMTPAuth = true;
+    $email->Username = 'seu_email';
+    $email->Password = 'sua_senha';
+    $email->SMTPSecure = 'tls';
+    $email->Port = 587;
+    // Configurações do e-mail
+    $email->setFrom('seu_email', 'Seu Nome');
+    $email->addAddress($clienteEmail, $clienteNome);
+    $email->isHTML(true);
+    $email->Subject = 'Notificação de andamento processual';
+    $email->Body = $mensagem;
+    // Envia o e-mail
+    $email->send();
+} catch (Exception $e) {
+    echo 'Não foi possível enviar o e-mail: ' . $email->ErrorInfo;
+}
+
+Essa função configura o PHPMailer para se conectar ao servidor SMTP do Gmail e enviar um e-mail para o cliente. Note que você precisa informar o seu e-mail e a sua senha do Gmail nas configurações do servidor SMTP.
+
+Você pode chamar a função notificarCliente() sempre que precisar enviar uma notificação para um cliente. Por exemplo, você pode chamá-la a cada vez que verificar o status de um processo no seu sistema. Assim, sempre que houver uma mudança no status, o cliente receberá uma notificação por e-mail, WhatsApp, Telegram e SMS.
+
+
+Sim, é possível enviar notificações por e-mail, WhatsApp, Telegram e SMS via PHP sem o uso de frameworks. Veja um exemplo de função que envia notificações:
+
+function enviarNotificacao($clienteEmail, $clienteTelefone, $clienteIdTelegram, $mensagem)
+{
+    // Envia a notificação por e-mail
+    $assunto = 'Notificação de andamento processual';
+    $headers = 'From: Seu Nome <seu_email>' . "\r\n";
+    $headers .= 'Reply-To: Seu Nome <seu_email>' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+    mail($clienteEmail, $assunto, $mensagem, $headers);
+
+    // Envia a notificação por WhatsApp
+    $url = 'https://api.whatsapp.com/send?phone=' . $clienteTelefone . '&text=' . urlencode($mensagem);
+    header('Location: ' . $url);
+    exit;
+
+    // Envia a notificação por Telegram
+    $url = 'https://api.telegram.org/botseu_token/sendMessage?chat_id=' . $clienteIdTelegram . '&text=' . urlencode($mensagem);
+    file_get_contents($url);
+
+    // Envia a notificação por SMS
+    // Precisa de uma conta em um serviço de envio de SMS, como o Twilio (https://www.twilio.com)
+    $accountSid = 'seu_account_sid';
+    $authToken = 'seu_auth_token';
+    $client = new Twilio\Rest\Client($accountSid, $authToken);
+    $client->messages->create(
+        $clienteTelefone,
+        array(
+            'from' => 'seu_numero_twilio',
+            'body' => $mensagem
+        )
+    );
+}
+
+
+Essa função usa as funções mail() e file_get_contents() para enviar notificações por e-mail, WhatsApp e Telegram, respectivamente. Note que você precisa informar as suas credenciais do Twilio nas variáveis $accountSid e $authToken.
+
+Você pode chamar a função enviarNotificacao() sempre que precisar enviar uma notificação para um cliente. Por exemplo, você pode chamá-la a cada vez que verificar o status de um processo no seu sistema. Assim, sempre que houver uma mudança no status, o cliente receberá uma notificação por e-mail, WhatsApp, Telegram e SMS.

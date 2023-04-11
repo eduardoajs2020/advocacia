@@ -2,12 +2,20 @@
  class Advogados{
     
     public $id;
+    public $nome;
+    public $sobrenome;
     public $oab;
-    public $name;
-    public $lastname;
+    public $telefone;
+    public $locais_atuacao;
+    public $nivel_autoridade;
+    public $endereco;
+    public $numero_endereco;
+    public $cidade;
+    public $estado;
+    public $cep;
     public $email;
     public $password;
-    public $image;
+    public $imagem;
     public $bio;
     public $token;
 

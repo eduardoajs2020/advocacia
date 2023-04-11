@@ -1,0 +1,218 @@
+CREATE DATABASE t_juris_proc
+
+
+
+Tabela1: Advogados
+
+Nome
+OAB
+E-mail
+Telefone
+Locais de Atuação
+
+Tabela2: Clientes
+
+Nome
+Endereço
+E-mail
+Telefone
+Mensagem
+
+
+Tabela3: Processos
+Dados Processuais
+
+Tabela4: Informações dos processos
+
+nProcesso
+nomeAdvogado
+OAB
+nomeCliente
+CPF
+CNPJ
+e-mail
+telefone |
+poloAtivo |
+poloPassivo |
+litisconsorte
+tipoAcao
+objetoAcao
+vara |
+comarca
+rito
+foro
+andar
+área
+fase
+situacao |
+instancia |
+valorCausa
+dataDistribuicao
+dataBaixa
+
+
+Tabela5: Usuários
+
+Nome de usuário
+Senha
+
+
+Essa é apenas uma possível estrutura, e pode variar de acordo com as necessidades e particularidades de cada escritório de advocacia ou empresa do ramo jurídico. Além disso, é importante lembrar que, para ser usado em um sistema, é preciso que o banco de dados seja desenvolvido e implementado por profissionais capacitados e seguindo as boas práticas de segurança da informação.
+
+
+
+
+Claro! Aqui está um exemplo de como implementar um CRUD (Create, Read, Update, Delete) no padrão REST usando PHP, considerando as tabelas e campos sugeridos anteriormente.
+
+Criar um novo registro na tabela de Advogados (Create)
+Método HTTP: POST
+Ponto de extremidade: /api/advogados
+Parâmetros:
+Nomo
+OAB
+E-mail
+Telefone
+Locais de Atuação
+Retorno: status 201 (Created) com o ID do novo registro ou status 400 (Bad Request) em caso de erro.
+Obter informações de um registro da tabela de Advogados (Read)
+Método HTTP: GET
+Ponto de extremidade: /api/advogados/{id}
+Parâmetros: ID do registro
+Retorno: status 200 (OK) com os dados do registro ou status 404 (Not Found) em caso de registro não encontrado.
+Atualizar um registro da tabela de Advogados (Update)
+Método HTTP: PUT
+Ponto de extremidade: /api/advogados/{id}
+Parâmetros:
+Nomo
+OAB
+E-mail
+Telefone
+Locais de Atuação
+Retorno: status 200 (OK) com os dados atualizados ou status 400 (Bad Request) em caso de erro.
+Excluir um registro da tabela de Advogados (Delete)
+Método HTTP: DELETE
+Ponto de extremidade: /api/advogados/{id}
+Parâmetros: ID do registro
+Retorno: status 204 (No Content) em caso de sucesso ou status 400 (Bad Request) em caso de erro.
+Segue abaixo um exemplo de implementação em PHP utilizando a biblioteca Slim Framework:
+
+
+
+
+
+<?php
+require 'vendor/autoload.php';
+
+$app = new \Slim\App;
+
+// Rota para criar um novo registro na tabela de Advogados
+$app->post('/api/advogados', function ($request, $response, $args) {
+    $data = $request->getParsedBody();
+    // Insira aqui o código para validar os dados recebidos
+    $db = new PDO('mysql:host=localhost;dbname=advocacia', 'usuario', 'senha');
+    $stmt = $db->prepare("INSERT INTO advogados (nome, oab, email, telefone, locais_de_atuacao) VALUES (:nome, :oab, :email, :telefone, :locais_de_atuacao)");
+    $stmt->bindParam(':nome', $data['nome']);
+    $stmt->bindParam(':oab', $data['oab']);
+    $stmt->bindParam(':email', $data['email']);
+    $stmt->bindParam(':telefone', $data['telefone']);
+    $stmt->bindParam(':locais_de_atuacao', $data['locais_de_atuacao']);
+    $stmt->execute();
+    $id = $db->lastInsertId();
+    return $response->withJson(['id' => $id])->withStatus(201);
+});
+
+// Rota para obter informações de um registro da tabela de Advogados
+$app->get('/api/advogados/{id}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $db = new PDO('mysql:host=localhost;dbname=advocacia', 'usuario', 'senha');
+    $stmt = $db->prepare("SELECT * FROM advogados WHERE id = :id");
+    $stmt->bindParam(':id', $id);
+
+
+Claro, aqui está um exemplo de CRUD básico em PHP seguindo o padrão REST para a entidade "Cliente":
+
+Criação de um novo cliente (POST)
+
+
+
+// Define os dados do cliente a ser criado
+$data = array(
+    "nome" => "João da Silva",
+    "endereco" => "Rua A, 123",
+    "email" => "joao.silva@gmail.com",
+    "telefone" => "(11) 98765-4321",
+    "mensagem" => "Gostaria de agendar uma consulta"
+);
+
+// Faz a requisição POST para a API
+$ch = curl_init('http://localhost/api/clientes');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+$response = curl_exec($ch);
+curl_close($ch);
+
+// Verifica se houve sucesso ou erro na criação do cliente
+if ($response === false) {
+    echo "Erro ao criar o cliente: " . curl_error($ch);
+} else {
+    echo "Cliente criado com sucesso!";
+}
+
+
+
+Leitura de um cliente existente (GET)
+
+
+
+
+// Faz a requisição GET para a API para obter os dados do cliente com ID 123
+$ch = curl_init('http://localhost/api/clientes/123');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$response = curl_exec($ch);
+curl_close($ch);
+
+// Verifica se houve sucesso ou erro na leitura do cliente
+if ($response === false) {
+    echo "Erro ao obter os dados do cliente: " . curl_error($ch);
+} else {
+    $cliente = json_decode($response, true);
+    echo "Nome: " . $cliente['nome'] . "<br>";
+    echo "Endereço: " . $cliente['endereco'] . "<br>";
+    echo "E-mail: " . $cliente['email'] . "<br>";
+    echo "Telefone: " . $cliente['telefone'] . "<br>";
+    echo "Mensagem: " . $cliente['mensagem'] . "<br>";
+}
+
+
+
+Atualização de um cliente existente (PUT)
+
+
+// Define os novos dados do cliente a ser atualizado
+$data = array(
+    "nome" => "João da Silva",
+    "endereco" => "Rua B, 456",
+    "email" => "joao.silva@gmail.com",
+    "telefone" => "(11) 98765-4321",
+    "mensagem" => "Gostaria de agendar uma consulta"
+);
+
+// Faz a requisição PUT para a API para atualizar os dados do cliente com ID 123
+$ch = curl_init('http://localhost/api/clientes/123');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+$response = curl_exec($ch);
+curl_close($ch);
+
+// Verifica se houve sucesso ou erro na atualização do cliente
+if ($response === false) {
+    echo "Erro ao atualizar o cliente: " . curl_error($ch);
+} else {
+    echo "Cliente atualizado com sucesso!";
+}
+
+
+
+Exclusão de um cliente existente (DELETE)

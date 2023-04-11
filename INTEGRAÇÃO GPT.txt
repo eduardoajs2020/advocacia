@@ -1,0 +1,86 @@
+Para integrar o ChatGPT em um site PHP, você pode seguir estes passos:
+
+Registre-se no OpenAI e obtenha uma chave de API para acessar o ChatGPT.
+
+Crie um arquivo PHP que se conecte à API do ChatGPT usando a chave de API. Aqui está um exemplo simples que usa a biblioteca cURL do PHP:
+
+
+$apiKey = 'sua_chave_de_api_aqui';
+$message = 'Olá, gostaria de saber mais sobre o seu serviço de advocacia.';
+
+$url = 'https://api.openai.com/v1/engines/davinci-codex/completions';
+$data = [
+    'prompt' => $message,
+    'max_tokens' => 50,
+    'temperature' => 0.7
+];
+$options = [
+    CURLOPT_URL => $url,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HTTPHEADER => [
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $apiKey
+    ],
+    CURLOPT_POSTFIELDS => json_encode($data)
+];
+$curl = curl_init();
+curl_setopt_array($curl, $options);
+$response = curl_exec($curl);
+curl_close($curl);
+
+$answer = json_decode($response, true)['choices'][0]['text'];
+echo $answer;
+
+
+
+Este código envia uma solicitação POST para a API do ChatGPT com uma mensagem e recebe uma resposta do modelo. A resposta é então exibida no navegador.
+
+Crie uma interface para o usuário enviar mensagens e exibir as respostas do ChatGPT. Isso pode ser feito usando HTML, CSS e JavaScript. Aqui está um exemplo básico de formulário que envia uma mensagem e exibe a resposta:
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ChatGPT</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="chatbox"></div>
+    <form id="chatform" method="POST">
+        <input type="text" name="message" placeholder="Digite sua mensagem aqui">
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        $(function() {
+            $('#chatform').submit(function(event) {
+                event.preventDefault();
+                var message = $('input[name="message"]').val();
+                $.ajax({
+                    type: 'POST',
+                    url: 'chat.php',
+                    data: { message: message },
+                    success: function(response) {
+                        $('#chatbox').append('<p><strong>Você:</strong> ' + message + '</p>');
+                        $('#chatbox').append('<p><strong>ChatGPT:</strong> ' + response + '</p>');
+                        $('input[name="message"]').val('');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+Este código cria um formulário que envia uma mensagem para o arquivo chat.php usando AJAX. Quando uma resposta é recebida do servidor, ela é exibida no elemento #chatbox. O arquivo chat.php deve conter o código PHP que se conecta à API do ChatGPT e retorna a resposta.
+
+Com estes passos, você pode integrar o ChatGPT em um site PHP e criar uma interface simples de chat para os usuários. Lembre-se de seguir as diretrizes de privacidade e segurança ao coletar e armazenar as informações do usuário.
+
+
+
+

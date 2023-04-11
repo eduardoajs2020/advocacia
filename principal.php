@@ -7,7 +7,7 @@
     <div id="principal-container">
       <div class="menu-1-activate">
         <div><a href="\utils\clienteGTP.php"><p class="menu-sub-img">Empresa</p></a></div>
-        <div><a href="\description_process.php"><p class="menu-sub-img">Grupos</p></a></div>
+        <div><a href="description_process.php"><p class="menu-sub-img">Grupos</p></a></div>
         <div><a href="#"><p class="menu-sub-img">Agendas</p></a></div>
         <div><a href="#"><p class="menu-sub-img">Suporte</p></a></div>
         <div><a href="#"><p class="menu-sub-img">Layout</p></a></div>            

@@ -2,11 +2,20 @@
  class User{
     
     public $id;
-    public $name;
-    public $lastname;
+    public $nome;
+    public $sobrenome;
+    public $oab;
+    public $telefone;
+    public $locais_atuacao;
+    public $nivel_autoridade;
+    public $endereco;
+    public $numero_endereco;
+    public $cidade;
+    public $estado;
+    public $cep;
     public $email;
     public $password;
-    public $image;
+    public $imagem;
     public $bio;
     public $token;
 

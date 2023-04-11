@@ -1,0 +1,178 @@
+from flask import Flask, request, jsonify
+import pyodbc
+
+app = Flask(__name__)
+
+# Conexão com o banco de dados
+server = 'SERVIDOR'
+database = 'BANCO_DE_DADOS'
+username = 'USUARIO'
+password = 'SENHA'
+conn_str = f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}"
+conn = pyodbc.connect(conn_str)
+
+# Função para adicionar um registro
+@app.route('/exemplo', methods=['POST'])
+def adicionar_registro():
+    data = request.get_json()
+    nome = data['nome']
+    idade = data['idade']
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO exemplo (nome, idade) VALUES (?, ?)", nome, idade)
+    cursor.commit()
+    cursor.close()
+    return jsonify({'message': 'Registro adicionado com sucesso.'})
+
+# Função para atualizar um registro
+@app.route('/exemplo/<int:id>', methods=['PUT'])
+def atualizar_registro(id):
+    data = request.get_json()
+    nome = data['nome']
+    idade = data['idade']
+    cursor = conn.cursor()
+    cursor.execute("UPDATE exemplo SET nome=?, idade=? WHERE id=?", nome, idade, id)
+    cursor.commit()
+    cursor.close()
+    return jsonify({'message': 'Registro atualizado com sucesso.'})
+
+# Função para excluir um registro
+@app.route('/exemplo/<int:id>', methods=['DELETE'])
+def excluir_registro(id):
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM exemplo WHERE id=?", id)
+    cursor.commit()
+    cursor.close()
+    return jsonify({'message': 'Registro excluído com sucesso.'})
+
+# Função para exibir os registros
+@app.route('/exemplo', methods=['GET'])
+def exibir_registros():
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM exemplo")
+    registros = cursor.fetchall()
+    cursor.close()
+    return jsonify({'registros': registros})
+
+# Inicialização da aplicação
+if __name__ == '__main__':
+    app.run(debug=True)
+    
+# Fechamento da conexão com o banco de dados
+conn.close()
+
+
+Com esse código, você pode realizar as seguintes operações através de chamadas HTTP:
+
+Adicionar um registro: POST /exemplo
+Atualizar um registro: PUT /exemplo/<id>
+Excluir um registro: DELETE /exemplo/<id>
+Exibir todos os registros: GET /exemplo
+Você pode testar a API utilizando ferramentas como o Postman ou cURL.
+
+
+
+
+
+ara criar um sistema CRUD em Flask, você pode seguir os seguintes passos:
+
+Crie um ambiente virtual e instale o Flask e o PyODBC:
+bash
+Copy code
+python -m venv venv
+source venv/bin/activate (ou venv\Scripts\activate no Windows)
+pip install Flask pyodbc
+Crie um arquivo app.py e importe os pacotes necessários:
+python
+Copy code
+from flask import Flask, request, jsonify
+import pyodbc
+Crie uma instância do Flask e configure a conexão com o banco de dados:
+python
+Copy code
+app = Flask(__name__)
+server = 'SERVIDOR'
+database = 'BANCO_DE_DADOS'
+username = 'USUARIO'
+password = 'SENHA'
+conn_str = f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}"
+Crie as rotas para as operações de CRUD:
+python
+Copy code
+# Rota para adicionar um registro
+@app.route('/exemplo', methods=['POST'])
+def adicionar_registro():
+    nome = request.json['nome']
+    idade = request.json['idade']
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO exemplo (nome, idade) VALUES (?, ?)", nome, idade)
+    cursor.commit()
+    cursor.close()
+    return jsonify({'mensagem': 'Registro adicionado com sucesso.'})
+
+# Rota para atualizar um registro
+@app.route('/exemplo/<int:id>', methods=['PUT'])
+def atualizar_registro(id):
+    nome = request.json['nome']
+    idade = request.json['idade']
+    cursor = conn.cursor()
+    cursor.execute("UPDATE exemplo SET nome=?, idade=? WHERE id=?", nome, idade, id)
+    cursor.commit()
+    cursor.close()
+    return jsonify({'mensagem': 'Registro atualizado com sucesso.'})
+
+# Rota para excluir um registro
+@app.route('/exemplo/<int:id>', methods=['DELETE'])
+def excluir_registro(id):
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM exemplo WHERE id=?", id)
+    cursor.commit()
+    cursor.close()
+    return jsonify({'mensagem': 'Registro excluído com sucesso.'})
+
+# Rota para exibir os registros
+@app.route('/exemplo', methods=['GET'])
+def exibir_registros():
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM exemplo")
+    registros = cursor.fetchall()
+    cursor.close()
+    return jsonify({'registros': registros})
+Inicie o servidor Flask:
+python
+Copy code
+if __name__ == '__main__':
+    app.run(debug=True)
+O código completo do arquivo app.py ficaria assim:
+
+python
+Copy code
+from flask import Flask, request, jsonify
+import pyodbc
+
+app = Flask(__name__)
+server = 'SERVIDOR'
+database = 'BANCO_DE_DADOS'
+username = 'USUARIO'
+password = 'SENHA'
+conn_str = f"DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}"
+conn = pyodbc.connect(conn_str)
+
+# Rota para adicionar um registro
+@app.route('/exemplo', methods=['POST'])
+def adicionar_registro():
+    nome = request.json['nome']
+    idade = request.json['idade']
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO exemplo (nome, idade) VALUES (?, ?)", nome, idade)
+    cursor.commit()
+    cursor.close()
+    return jsonify({'mensagem': 'Registro adicionado com sucesso.'})
+
+# Rota para atualizar um registro
+@app.route('/exemplo
+
+
+
+
+
+

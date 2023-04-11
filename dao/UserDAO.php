@@ -20,11 +20,11 @@ class UserDAO implements UserDAOInterface{
         $user = new User();
 
         $user->id = $data["id"];
-        $user->name = $data["name"];
-        $user->lastname = $data["lastname"];
+        $user->nome = $data["nome"];
+        $user->sobrenome = $data["sobrenome"];
         $user->email = $data["email"];
         $user->password = $data["password"];
-        $user->image = $data["image"];
+        $user->imagem = $data["image"];
         $user->bio = $data["bio"];
         $user->token = $data["token"];
 
@@ -36,8 +36,8 @@ class UserDAO implements UserDAOInterface{
         $stmt = $this->conn->prepare("INSERT INTO users(name, lastname, email, password, token)VALUES(
             :name, :lastname, :email, :password, :token)");
 
-        $stmt->bindParam(":name", $user->name);
-        $stmt->bindParam(":lastname", $user->lastname);
+        $stmt->bindParam(":name", $user->nome);
+        $stmt->bindParam(":lastname", $user->sobrenome);
         $stmt->bindParam(":email", $user->email);
         $stmt->bindParam(":password", $user->password);
         $stmt->bindParam(":token", $user->token);
@@ -54,7 +54,7 @@ class UserDAO implements UserDAOInterface{
 
         $stmt = $this->conn->prepare("UPDATE users SET
         name = :name,
-        lastname = :lastname,
+        sobrenome = :sobrenome,
         email = :email,
         image = :image,
         bio = :bio,
@@ -62,10 +62,10 @@ class UserDAO implements UserDAOInterface{
         WHERE id = :id
         ");
 
-        $stmt->bindParam(":name", $user->name);
-        $stmt->bindParam(":lastname", $user->lastname);
+        $stmt->bindParam(":name", $user->nome);
+        $stmt->bindParam(":lastname", $user->sobrenome);
         $stmt->bindParam(":email", $user->email);
-        $stmt->bindParam(":image", $user->image);
+        $stmt->bindParam(":image", $user->imagem);
         $stmt->bindParam(":bio", $user->bio);
         $stmt->bindParam(":token", $user->token);
         $stmt->bindParam(":id", $user->id);

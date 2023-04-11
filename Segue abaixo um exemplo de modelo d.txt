@@ -1,0 +1,74 @@
+Segue abaixo um exemplo de modelo do frontend utilizando o framework Bootstrap e o Jinja2 para renderizar o template com os dados da aplicação:
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Minha Aplicação</title>
+	<!-- Importação do Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container mt-4">
+		<h1>Minha Aplicação</h1>
+		<hr>
+		<!-- Formulário para adicionar ou atualizar registro -->
+		<form method="post" action="{{ url_for('adicionar') }}" id="form-registro">
+			<input type="hidden" name="id" value="{{ registro.id }}">
+			<div class="form-group">
+				<label for="nome">Nome:</label>
+				<input type="text" name="nome" id="nome" class="form-control" value="{{ registro.nome }}" required>
+			</div>
+			<div class="form-group">
+				<label for="idade">Idade:</label>
+				<input type="number" name="idade" id="idade" class="form-control" value="{{ registro.idade }}" required>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">{{ botao }}</button>
+				<button type="button" class="btn btn-danger" id="btn-excluir" {% if not registro.id %} disabled {% endif %}>Excluir</button>
+			</div>
+		</form>
+		<hr>
+		<!-- Tabela de registros -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Idade</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for registro in registros %}
+				<tr>
+					<td>{{ registro.id }}</td>
+					<td>{{ registro.nome }}</td>
+					<td>{{ registro.idade }}</td>
+					<td>
+						<a href="{{ url_for('editar', id=registro.id) }}" class="btn btn-sm btn-primary">Editar</a>
+						<a href="{{ url_for('excluir', id=registro.id) }}" class="btn btn-sm btn-danger">Excluir</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<!-- Importação do jQuery e do Bootstrap -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<!-- Script para habilitar/desabilitar botão de excluir -->
+	<script>
+		$(document).ready(function() {
+			$('#form-registro input').on('keyup', function() {
+				$('#btn-excluir').prop('disabled', !$('#form-registro input[name="id"]').val());
+			});
+		});
+	</script>
+</body>
+</html>
+
+
+
+O código acima define um formulário para adicionar ou atualizar registros, uma tabela para exibir os registros e um script para habilitar ou desabilitar o botão de excluir, de acordo com a presença ou ausência do ID do
