@@ -1,5 +1,8 @@
 <?php
+session_set_cookie_params(1800); // 1800 segundos = 30 minutos
+
 session_start();
+
 require_once('db.php');
 
 // Verificar se os campos de nome de usuário e senha foram preenchidos

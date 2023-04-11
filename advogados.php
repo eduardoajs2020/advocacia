@@ -1,12 +1,8 @@
-<!--!DOCTYPE html>
-<html lang="en" dir="ltr">
-  head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maxmum-scale=1, user-scalable=no">
-    <title>Contato</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-  </head-->
   <?php 
+  session_set_cookie_params(1800); // 1800 segundos = 30 minutos
+  session_start();
+  
+  require_once('validate_login.php');
   require_once("templates/header.php");
   
   ?>

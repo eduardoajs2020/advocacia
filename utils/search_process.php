@@ -1,4 +1,10 @@
 <?php
+session_set_cookie_params(1800); // 1800 segundos = 30 minutos
+session_start();
+
+require_once('validate_login.php');
+require_once('templates/header.php');
+require_once('utils/db.php');
 
 // cria uma instância do cURL
 $curl = curl_init();
@@ -49,4 +55,6 @@ curl_close($curl);
 
 // exibe o resultado da consulta
 echo $result;
+
+require_once('templates/footer.php');
 ?>

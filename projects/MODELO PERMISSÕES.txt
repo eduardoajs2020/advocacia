@@ -1,0 +1,113 @@
+Uma forma comum de atribuir autenticações para diferentes níveis de usuários é utilizar um sistema de controle de acesso baseado em papéis (RBAC - Role-Based Access Control).
+
+Nesse sistema, cada usuário é atribuído a um ou mais papéis que definem suas permissões de acesso. Cada papel é associado a um conjunto de permissões que definem quais ações o usuário pode realizar. Por exemplo, um usuário com o papel "tipo1" pode ter permissões limitadas, enquanto um usuário com o papel "superuser" tem permissões completas.
+
+Para implementar esse sistema, você pode criar uma tabela de usuários no banco de dados que inclua informações sobre o nome de usuário, senha e papel. Você também precisará criar uma tabela de papéis que inclua informações sobre o nome do papel e as permissões associadas a ele.
+
+A seguir, um exemplo simples de implementação de RBAC em PHP:
+
+
+// Verifica se o usuário tem permissão para acessar a página
+function check_permission($page, $user_role) {
+    // Defina as permissões para cada página e papel de usuário
+    $permissions = array(
+        'pagina1' => array('tipo1', 'tipo2', 'tipo3', 'superuser'),
+        'pagina2' => array('tipo2', 'tipo3', 'superuser'),
+        'pagina3' => array('tipo3', 'superuser'),
+        'pagina4' => array('superuser')
+    );
+
+    // Verifica se o usuário tem permissão para acessar a página
+    if (in_array($user_role, $permissions[$page])) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// Exemplo de uso:
+$user_role = 'tipo2'; // papel do usuário
+$page = 'pagina2'; // página que o usuário está tentando acessar
+
+if (check_permission($page, $user_role)) {
+    // usuário tem permissão para acessar a página
+    // inclua aqui o código para exibir a página
+} else {
+    // usuário não tem permissão para acessar a página
+    // inclua aqui o código para exibir uma mensagem de erro ou redirecionar o usuário para outra página
+}
+
+
+
+Neste exemplo, a função check_permission() verifica se o usuário tem permissão para acessar a página com base no papel atribuído ao usuário e nas permissões associadas a cada página. As permissões são definidas no array $permissions. Se o usuário tiver permissão para acessar a página, a função retorna true. Caso contrário, retorna false.
+
+Este é um exemplo básico de como você pode implementar o controle de acesso baseado em papéis. É possível refinar o sistema adicionando mais funcionalidades, como por exemplo, adicionar um sistema de permissões individuais para cada usuário.
+
+
+
+
+Para atribuir autenticações para níveis de usuário diferentes, você pode incluir uma coluna no banco de dados que represente o nível de acesso de cada usuário (por exemplo, "tipo1", "tipo2", "tipo3" e "superuser"). Em seguida, você pode verificar o nível de acesso do usuário após o login e redirecioná-lo para a página correta com base em seu nível de acesso.
+
+Você pode fazer isso incluindo a seguinte lógica no código:
+
+Após armazenar os dados do usuário na sessão, adicione uma variável de sessão para armazenar o nível de acesso do usuário. Por exemplo:
+
+
+// Iniciar a sessão e armazenar os dados do usuário
+$_SESSION["loggedin"] = true;
+$_SESSION["id"] = $result["id"];
+$_SESSION["username"] = $result["username"];
+$_SESSION["access_level"] = $result["access_level"]; // adicionar esta linha
+
+
+
+Em seguida, adicione um bloco de instruções condicionais para verificar o nível de acesso do usuário e redirecioná-lo para a página correta:
+
+
+
+// Verificar o nível de acesso do usuário e redirecioná-lo para a página correta
+if ($_SESSION["access_level"] == "tipo1") {
+    header("Location: /pagina_tipo1.php");
+} elseif ($_SESSION["access_level"] == "tipo2") {
+    header("Location: /pagina_tipo2.php");
+} elseif ($_SESSION["access_level"] == "tipo3") {
+    header("Location: /pagina_tipo3.php");
+} elseif ($_SESSION["access_level"] == "superuser") {
+    header("Location: /pagina_superuser.php");
+} else {
+    // Exibir uma mensagem de erro em caso de nível de acesso inválido
+    $login_err = "Nível de acesso inválido!";
+}
+
+
+
+Por fim, você pode incluir essa lógica no código original, da seguinte forma:
+
+
+
+
+// Iniciar a sessão e armazenar os dados do usuário
+$_SESSION["loggedin"] = true;
+$_SESSION["id"] = $result["id"];
+$_SESSION["username"] = $result["username"];
+$_SESSION["access_level"] = $result["access_level"];
+
+// Verificar o nível de acesso do usuário e redirecioná-lo para a página correta
+if ($_SESSION["access_level"] == "tipo1") {
+    header("Location: /pagina_tipo1.php");
+} elseif ($_SESSION["access_level"] == "tipo2") {
+    header("Location: /pagina_tipo2.php");
+} elseif ($_SESSION["access_level"] == "tipo3") {
+    header("Location: /pagina_tipo3.php");
+} elseif ($_SESSION["access_level"] == "superuser") {
+    header("Location: /pagina_superuser.php");
+} else {
+    // Exibir uma mensagem de erro em caso de nível de acesso inválido
+    $login_err = "Nível de acesso inválido!";
+}
+
+
+Observe que você precisará criar as páginas correspondentes para cada nível de acesso (por exemplo, "pagina_tipo1.php", "pagina_tipo2.php", etc.) e definir as permissões de acesso apropriadas para cada uma.
+
+
+

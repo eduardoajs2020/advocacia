@@ -79,7 +79,7 @@
   margin-right: auto;
   padding: 30px 30px 30px 30px;
   width: 500px;
-  height: 500px;
+  height: 600px;
   border-radius: 15px 15px 15px 15px;
   opacity: .9;
   
@@ -138,6 +138,14 @@
 .name-titulo-1{
   color: #EEE;
   text-align: center;
+  
+}
+
+.msg-erro-1{
+  background-color: #121212;
+  color: red;
+  text-align: center;
+  font-size: 24px;
   
 }
   

@@ -1,4 +1,7 @@
 <?php 
+session_set_cookie_params(1800); // 1800 segundos = 30 minutos
+session_start();
+
 
 require_once("templates/header.php");
 require_once("dao/UserDAO.php");

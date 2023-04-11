@@ -1,4 +1,10 @@
   <?php
+  session_set_cookie_params(1800); // 1800 segundos = 30 minutos
+  
+  session_start();
+
+
+  require_once('validate_login.php');
   require_once("templates/header.php");
   require_once("utils/db.php");
   require_once("globals.php");

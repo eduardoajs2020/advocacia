@@ -1,12 +1,15 @@
 
-  <?php 
+<?php 
+    session_set_cookie_params(1800); // 1800 segundos = 30 minutos
+    session_start();
+    require_once('validate_login.php');
     require_once("templates/header.php");
-  ?>
+?>
 
   <body>
     <div id="principal-container">
       <div class="menu-1-activate">
-        <div><a href="\utils\clienteGTP.php"><p class="menu-sub-img">Empresa</p></a></div>
+        <div><a href="/utils/clienteGTP.php"><p class="menu-sub-img">Empresa</p></a></div>
         <div><a href="description_process.php"><p class="menu-sub-img">Grupos</p></a></div>
         <div><a href="#"><p class="menu-sub-img">Agendas</p></a></div>
         <div><a href="#"><p class="menu-sub-img">Suporte</p></a></div>
@@ -17,7 +20,7 @@
         <div><a href="clientes.php"><p class="menu-sub-img">Clientes</p></a></div>
         <div><a href="#"><p class="menu-sub-img">Recibos</p></a></div>
         <div><a href="#"><p class="menu-sub-img">Backup</p></a></div>
-        <div><a href="\modelosDoc.php"><p class="menu-sub-img">Modelos</p></a></div>            
+        <div><a href="modelosDoc.php"><p class="menu-sub-img">Modelos</p></a></div>            
       </div>
       <div class="background-activate">
         <a href="#"></a>
